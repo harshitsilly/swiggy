@@ -1,0 +1,28 @@
+
+<ion-view view-title="Mensajes">
+    <ion-content>
+        <div class="list">
+            <div class="list">
+                <div class="item item-divider">
+                    Información a Transmitir
+                </div>
+                <label class="item item-input">
+                    <textarea placeholder="Mensaje" ng-model="dataToSend" ng-maxlength="201"></textarea>
+                </label>
+                <div class="padding">
+                    <div class="button-bar">
+                        <a class="button button-block button-positive" ng-click="dataToSend=''">Limpiar</a>
+                        <a class="button button-block button-positive" ng-click="send(dataToSend)">Enviar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item item-divider">
+                Estado
+            </div>
+            <div class="item">
+                <pre ng-bind="stateNotification"></pre>
+            </div>
+        </div>
+      </ion-content>
+</ion-view>
+

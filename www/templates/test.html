@@ -1,0 +1,103 @@
+
+ <ion-view title="Me" >
+  
+   <ion-content  ng-controller="testCtrl" class="has-header">
+      
+     <div ng-hide="editing" >
+       
+        <!--<button class="button button-full button-energized" ng-click="getImageSaveContact()" >
+      Add image
+    </button>-->
+    <div class=" profile2 row">
+     
+     <!--<img ng-src="{{image}}" style="width:100%; height: auto;"/-->
+      <div class="col col-80">
+     <img   class=" col col-offset-33 profile" style="height: 9rem;
+    max-width: 9rem;" ng-src="{{image}}" >
+    <div class="row title  hars">
+      
+   Hi <br> 
+    {{name}}
+   
+    </div>
+      </div>
+      <div class="col ">
+      <button class="col col-10   button-clear button-positive icon ion-edit"  ng-click="takePhoto()"></button> 
+       <button class="col col-10  button-clear button-positive icon ion-plus-round"  ng-click="choosePhoto()"></button> 
+      </div>
+        <nav mfb-menu class="edit"  
+     resting-icon="ion-edit"  active-icon="ion-edit"
+     ng-hide="editing" ng-click="editing = true" >
+ 
+</nav>
+    </div>
+     <div class="spacer" style="height: 1rem;"></div>
+ <a  class="item item-icon-left" >
+    <i class="icon ion-person"></i>
+   {{name}}
+  </a>
+
+  
+
+  <a  class="item item-icon-left">
+    <i class="icon ion-ios-telephone"></i>
+    {{Phonenumber}}
+  </a>
+  
+  <a  class="item item-icon-left">
+    <i class="icon ion-at"></i>
+    {{Email}}
+  </a>
+<a  class="item item-icon-left">
+    <i class="icon ion-home"></i>
+    {{Address}}
+  </a>
+
+  <a  class="item item-icon-left">
+    
+    <i class="icon ion-card"></i>
+    YourTransactions
+    
+  
+   
+  </a>
+
+</div>
+
+
+
+ <form  ng-show="editing" ng-submit="edit()">
+                    <div class="list">
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Name</span>
+    <input type="text"  ng-model="name" placeholder="Name" ng-required/>
+  </label>
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Phone Number</span>
+    <input type="number"  ng-model="Phonenumber" placeholder="Phone Number" ng-required/>
+  </label>
+ 
+   <label class="item item-input item-floating-label">
+    <span class="input-label">Email</span>
+    <input type="text" ng-model="Email" placeholder="Email" ng-required/>
+  </label>
+   <label class="item item-input item-floating-label">
+    <span class="input-label">Address</span>
+    <input type="text" ng-model="Address"  placeholder="Address" ng-required/>
+    
+  </label>
+</div>
+                    <br/>
+                    <button class="button button-block icon-right ion-chevron-right button-calm" type="submit" ng-click="editing = false">Save</button>
+
+                    <!--<button class="btn" type="submit">Save</button>-->
+                  </form>
+                  
+                  
+                 
+
+        
+      
+   </ion-content>
+ </ion-view>
+ 

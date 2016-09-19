@@ -1,0 +1,33 @@
+<div class="modal custommodal slide-in-right" style="height: 300px;" ng-controller="newPassCtrl">
+   <header class="bar bar-header">
+      <h3>YOUR CART</h3>
+   </header>
+   <ion-content class="marginzero has-header">
+     <ion-list ng-repeat="cartmenu in checkout.cart_menu_items" >
+    <ion-item >
+      {{cartmenu.name}}
+
+      
+		<button class="button button-clear icon ion-android-remove-circle button-energized" ng-disabled="cartmenu.quantity===0" ng-click="cartmenu.quantity= cartmenu.quantity -1"></button>
+		 {{cartmenu.quantity}}
+		<button class=" button button-clear icon ion-android-add-circle button-energized" ng-click="cartmenu.quantity= cartmenu.quantity +1;cartUpdate(cartmenu)"></button>
+		{{cartmenu.total}}
+      </ion-item> 
+     </ion-list>
+        <span class="marginzero col col-offset-66 col-33">
+      <div>Item Total :  {{checkout.cart_subtotal_without_packing}}</div>
+      <div>
+      Delivery Charges :  {{checkout.delivery_charges}}</div>
+      <div>
+      Packaging Charges :  {{checkout.total_packing_charges}}</div>
+        </span>
+     
+     <ion-item class=" "> 
+       Grand Total :  {{checkout.cart_total}}
+     </ion-item>
+    
+   </ion-content>
+   <ion-footer-bar class= "checkoutfooter">
+       <button class="button marginzero  buttoncheckout button-full button-assertive">CHECKOUT</button>
+   </ion-footer-bar>
+</div>

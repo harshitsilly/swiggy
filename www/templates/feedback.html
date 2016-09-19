@@ -1,0 +1,40 @@
+<ion-view title="Feedback">
+    <ion-content overflow-scroll="true" padding="true" class="has-header profile1">
+        <div>
+            <blockquote>
+                <p class="hars">Tell us what you think about onecard. Will you refer to others.</p>
+            </blockquote>
+        </div>
+        
+        <div class="hars">
+            
+        Rating : <span>{{numberSelection}} </span>
+        </div>
+        <div class="row">
+  <div class="col col-25 hars rate">&nbsp;&nbsp;&nbsp;&nbsp;0</div>
+  <div class="col col-25 col-offset-50 hars">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10</div>
+</div>
+        <div class="range">
+           
+            <input type="range" name="volume" min="0" max="10"  value="{{numberSelection}}" ng-model="numberSelection">
+            
+          </div>
+           <div class="row">
+  <div class="col col-33 hars">Not likely at all</div>
+  <div class="col col-33  hars rate1">Extremely likely</div>
+</div>
+
+  <div class="spacer" style="height: 7%;"></div>
+          <label>
+                <p class="hars">Please explain why you give this score,</p>
+          </label>
+          
+        <form class="list" action="submit">
+            <label class="item item-input hars hide-on-keyboard-open">
+                <input type="text" placeholder="Review us">
+            </label>
+        </form>
+         <div class="spacer" style="height: 3%;"></div>
+        <a href="mailto:amitsighdtu@gmail.com" class="button button-dark button-block  icon-left ion-android-send">Send</a>
+    </ion-content>
+</ion-view>

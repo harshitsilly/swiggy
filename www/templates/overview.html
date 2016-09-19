@@ -1,0 +1,91 @@
+
+<ion-view title="Home">
+    
+    <ion-nav-buttons side="right">
+      
+      
+      <button class="button button-clear button-light icon ion-edit" ng-click="Locationedit()">
+      </button>
+    </ion-nav-buttons>
+       
+    <ion-header-bar class="bar-subheader"> 
+      <span class="marginzero col col-90">
+      <label class="item item-input ">
+  <i class="icon ion-search placeholder-icon"></i>
+      <input class="searchsort" type="search" placeholder="Search restaurants,dishes.."></input>
+      
+</label>
+      </span>
+      <button class="button button-clear button-dark icon ion-funnel" ng-click="restaurantsort()">
+      </button>
+    </ion-header-bar>
+  <ion-content overflow-scroll="true" padding="true" class="has-header has-footer " ng-controller="overviewCtrl ">
+    
+
+ 
+
+  
+
+         
+                    <div  ng-repeat="closedrestaurant in closedrestaurants | filter: search.value  | orderBy :  sort"  id="{{hospital.key}}">
+         
+     <div class="list card" ng-click="restaurantclick(closedrestaurant)">
+
+
+
+  <div class="item item-image imagerest">
+    <img src="https://res.cloudinary.com/swiggy/image/upload/c_scale,f_auto,fl_lossy,h_134,q_80,w_269/{{closedrestaurant.cloudinaryImageId}}">
+     <span class="restclosedstatus">{{closedrestaurant.nextOpenMessage}}</span>
+  </div>
+
+  <div class="item">
+    <div class="Restname">{{closedrestaurant.name}}</div>
+    {{closedrestaurant.cuisine | cuisineFilter}}
+  </div>
+  
+  <div class="item " href="#">
+   
+    <span><i class="rupeeenabled" ng-show="closedrestaurant.costForTwoString[0]"> &#8377
+    </i>
+    <i  class="rupeeenabled" ng-show="closedrestaurant.costForTwoString[1]"> &#8377
+ </i>
+    <i class="rupeeenabled" ng-show ="closedrestaurant.costForTwoString[2]"> &#8377
+   </i>
+    <i class="rupeeenabled" ng-show ="closedrestaurant.costForTwoString[3]"> &#8377
+    </i>
+    <i  class="rupeedisabled"  ng-hide="closedrestaurant.costForTwoString[0]"> &#8377
+    </i>
+    <i  class="rupeedisabled"  ng-hide="closedrestaurant.costForTwoString[1]"> &#8377
+ </i>
+    <i  class="rupeedisabled"  ng-hide ="closedrestaurant.costForTwoString[2]"> &#8377
+   </i>
+    <i  class="rupeedisabled"  ng-hide ="closedrestaurant.costForTwoString[3]"> &#8377
+    </i>
+    
+    </span>
+    <span><i class="icon ion-star energized"></i>
+    {{closedrestaurant.avg_rating}}
+    </span>
+  </div>
+
+</div>     
+                    
+                   
+                       
+                         
+ </div>
+         
+    
+  
+      
+      
+    
+    
+     
+    </ion-content>
+    <ion-footer-bar align-title="left" class="bar-dark">
+ 
+ 
+ 
+</ion-footer-bar>
+</ion-view>

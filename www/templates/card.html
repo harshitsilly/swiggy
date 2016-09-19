@@ -1,0 +1,94 @@
+
+
+<ion-view title="{{restaurant.name}}">
+   <ion-nav-bar class="bar-dark">
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+</ion-nav-bar>
+    <ion-content overflow-scroll="true"   scroll="true">
+		
+     	<tab-slide-box  ng-if="foodmenu">
+			    	<div class="tsb-icons ">
+			    		<div class="tsb-ic-wrp">
+							<ion-scroll direction="x" class="tsb-hscroll">
+								<a href="javascript:;" class="{{tab.icon}}" ng-repeat="menu in foodmenu" on-finish-render="test()">{{menu.name}}</a>
+							</ion-scroll>
+						</div>
+			    	</div>
+			        <ion-slide-box show-pager="false"   on-slide-changed="slideHasChanged($index)">
+			            <ion-slide  ng-repeat="menu in foodmenu" >
+			               								
+
+  <ion-list>
+        <div ng-repeat="categories in menu.subCategories">
+          <ion-item class="item-stable"
+                    ng-click="toggleGroup(categories)"
+                    ng-class="{active: isGroupShown(categories)}">
+					<div>
+              <i class="icon" ng-class="isGroupShown(categories) ? 'ion-chevron-down' : 'ion-chevron-right'"></i>
+            &nbsp;
+             {{categories.name}}
+					</div>
+          </ion-item>
+          <ion-item class="item-accordion marginzero"
+                    ng-repeat="fooditem in categories.menu"
+                    ng-show="isGroupShown(categories)">
+					 <div class="list card  " ng-click="" ng-init="fooditem.quantity = 0">
+
+
+
+  <div class="item item-image imagerest" ng-if = "fooditem.cloudinaryImageId">
+    <img src="https://res.cloudinary.com/swiggy/image/upload/c_scale,f_auto,fl_lossy,h_134,q_80,w_269/{{fooditem.cloudinaryImageId}}">
+     <span class="restclosedstatus">{{closedrestaurant.nextOpenMessage}}</span>
+  </div>
+
+  <div class="item marginzero">
+ {{fooditem.name}}
+ <i class="icon ion-star energized"></i>
+  <span ng-bind="fooditem.price/100"></span>
+   
+    
+
+		<button class="button button-clear icon ion-android-remove-circle button-energized" ng-disabled="fooditem.quantity===0" ng-click="fooditem.quantity= fooditem.quantity -1"></button>
+		 {{fooditem.quantity}}
+		<button class=" button button-clear icon ion-android-add-circle button-energized" ng-click="fooditem.quantity= fooditem.quantity +1;cartUpdate(fooditem)"></button>
+		
+		
+
+   
+  </div>
+  
+  
+          </ion-item>
+        </div>
+      </ion-list>
+			            </ion-slide>
+			            
+			        </ion-slide-box>
+          	</tab-slide-box>
+  
+       </div> 
+
+
+    </ion-content>
+
+	<ion-footer-bar align-title="left" class=" marginzero bar-dark" >
+ <span class="col col-66" ng-click="finalcart()">
+	 <span class=" marginzero row">
+<span class = "marginzero col col-90">
+ 
+  <div>Your Cart</div>
+
+ {{checkout.cart_subtotal}}
+
+</span>
+
+ {{checkout.cart_total_count}}
+	 </span>
+ </span>
+  
+    <button class=" col col-33 marginzero button  button-assertive" ng-click="checkout()">CheckOut</button>
+  
+
+</ion-footer-bar>
+</ion-view>

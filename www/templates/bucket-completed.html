@@ -1,0 +1,50 @@
+<ion-header-bar class="bar-positive">
+   <h1 class="title">Favourite Cards</h1>
+   <button class="button button-clear" ng-click="logout()">Logout</button>
+</ion-header-bar>
+<ion-content class="has-header padding" has-tabs="true" on-refresh="onRefresh()">
+       <div class="list card" ng-repeat="item in list" id="{{item.key}}" >
+      <div class="item item-text-wrap">
+       <div class="item item-divider"> <label>Card Number</label>         {{ item.item1 }}
+         </div>
+         <div class="item item-divider">
+               <label>Holder Name</label>  
+          
+         {{ item.item2 }}
+        </div>
+         <div class="item item-divider">
+               <label>Valid Thru</label>  
+         {{ item.item3 }}
+         </div>
+         <div class="item item-divider">
+               <label>CVV</label>  
+         {{ item.item4 }}
+         </div>
+         <div class="item item-divider">
+               <label>Position</label>  
+         {{ item.item5 }},{{ item.item6 }}
+         </div>
+          
+         
+         <br/>  <br/>
+         <p class="actions padding">
+           
+            <i class="ion-trash-b icon-actions margin" ng-click="deleteItem('{{item.key}}')"></i>
+         </p>
+      </div>
+   </div>
+    <span >
+               
+          </span>
+   
+   <div class="card" >
+      <div class="item item-text-wrap" ng-show="noData || incomplete">
+         <span ng-show="incomplete">
+         You have no favourite cards. Please select favourite cards freom ADD card tab.
+         </span>
+         <span ng-show="noData">
+         No cards in your bucket.
+         </span>
+      </div>
+   </div>
+</ion-content>

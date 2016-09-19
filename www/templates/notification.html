@@ -1,0 +1,33 @@
+<ion-view>
+  <ion-header-bar align-title="left" class="bar-dark">
+     <button class="button button-clear icon ion-android-arrow-back" ng-click="locationback()">
+     </button>
+     <Label  class="searchwidth" ng-hide="search"> Select Delivery Location</label>
+    <input class="inputlocation" ng-show ="search"  type="search" placeholder="Enter Delivery Location">
+  
+  <button  ng-hide="search" class="button button-clear icon ion-android-search" ng-click="search = !search">
+  
+  </button>
+  </ion-header-bar>
+   <ion-content class="padding has-header">
+     <div class="card">
+  <div class="item item-text-wrap">
+Current Location
+  </div>
+   <button class="button button-block button-clear icon-left ion-location button-positive">Locate me</button>
+</div>
+
+  <div class="card">
+  <div class="item item-text-wrap">
+    Saved Address
+  </div>
+   <button class="button button-clear icon-left ion-location button-positive">Locate me</button>
+</div>
+
+
+
+
+     
+      
+   </ion-content>
+</ion-view>

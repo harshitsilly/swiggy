@@ -1,0 +1,54 @@
+
+<ion-view view-title="Arduino & Apache Cordova + Ionic">
+    <ion-content>
+        <div class="list">
+            <div class="item item-divider">
+                Settings
+            </div>
+
+            <div class= "row" >
+                
+                <div class="col col-66">
+                    
+                  <label class= "row row-70 hars3">  Bluetooth Sync
+                  </label>  
+                  <label class="row hars4">Last sync : {{n}}, {{m}}</label>
+               </div>
+             
+                                     <div class="box col col-33">
+  <button  class="button button-icon  ion-android-sync customIconSound " ng-click="connectBT()">
+                   
+                </button>
+</div>
+               
+           </div>
+            
+            <div class="padding" >
+                <button class="button button-block button-positive" ng-click="checkBT()">
+                    BLUETOOTH Settings
+                                    </button>
+                                    
+                                  
+                <button class="button button-block button-positive" ng-click="connectBT1()">
+                    Connect
+                </button>
+                 <button class="button button-block button-positive" ng-click="connectBT2()">
+                   send data
+                </button>   
+              
+                 <button class="button button-block button-positive" ng-click="connectBT3()">
+                    read data
+                </button>  
+                <button class="button button-block button-positive" ng-click="connectBT6()">
+               check
+                </button> 
+                 <button  class="button button-full button-assertive foot" ng-click="openModal(class)">class</button>             
+               
+            </div>
+           
+                       
+           
+        </div>
+    </ion-content>
+    
+</ion-view>
