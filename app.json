@@ -1,0 +1,7 @@
+{
+    "name": "Swiggy ",
+    "description": "Client for windows webapp",
+    "repository": "https://github.com/harshitsilly/swiggy",
+    "logo": "www/templates/img/Swiggy.png",
+    "keywords": ["ionic", "harshitsilly"]
+}
