@@ -1,14 +1,21 @@
-<ion-view>
-  <ion-header-bar align-title="left" class="bar-dark">
-     <button class="button button-clear icon ion-android-arrow-back" ng-click="locationback()">
-     </button>
-     <Label  class="searchwidth" ng-hide="search"> Select Delivery Location</label>
-    <input class="inputlocation" ng-show ="search"  type="search" placeholder="Enter Delivery Location">
-  
-  <button  ng-hide="search" class="button button-clear icon ion-android-search" ng-click="search = !search">
-  
-  </button>
-  </ion-header-bar>
+<ion-view title="{{restaurant.name}}" ng-init="locationsearch=false">
+   <ion-nav-bar class="bar-dark">
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+    <ion-nav-buttons side="right">
+      <span class="marginzero col col-90" ng-show="locationsearch">
+      <label class="item item-input item-dark borderlocation">
+  <i class="icon ion-search placeholder-icon"></i>
+      <input class="searchsort" type="search"  ng-autocomplete="result1" details="details1" options="options1" placeholder="Search your location.."></input>
+      
+</label>
+      </span>
+      
+      <button class="button button-clear button-light icon ion-search" ng-hide="locationsearch" ng-click="locationsearch = !locationsearch">
+      </button>
+    </ion-nav-buttons>
+</ion-nav-bar>
+   
    <ion-content class="padding has-header">
      <div class="card">
   <div class="item item-text-wrap">

@@ -292,8 +292,9 @@ $scope.datePickerCallback = function (val) {
 })
 
 
-.controller('overviewCtrl',  function($scope,$rootScope,$ionicModal,$location,$state,$http,$ionicPopup,$ionicLoading,$ionicPlatform) {
+.controller('overviewCtrl',  function($scope,$rootScope,$ionicModal,$location,$state,$http,$ionicPopup,$ionicLoading,$ionicPlatform,toastr,$timeout) {
  $ionicPlatform.ready(function() {
+    
 	 $ionicLoading.show({
       template: '<ion-spinner class="ionicspinner" icon="android"></ion-spinner>'
     });
@@ -302,27 +303,35 @@ $scope.datePickerCallback = function (val) {
      var onSuccess=  function(position) {
       $scope.lat = position.coords.latitude;
      $scope.lng = position.coords.longitude;
+     
 $http({
   method: 'get',
   url: 'https://www.swiggy.com/api/restaurants/list?lat=' + $scope.lat +'&lng='+ $scope.lng +'&carousel=true',
  
 }).then(function successCallback(response) {
-  console.log(response);
   $ionicLoading.hide();
+  setTimeout(function() {
+      
+  },1000);
+  console.log(response);
   if(response.data.data.rest_list)
-  {  $scope.closedrestaurants = response.data.data.rest_list[2].restaurants;
+  {  $scope.closedrestaurants = response.data.data.rest_list[0].restaurants;
+       $scope.carousels = response.data.data.carousel;
    console.log($scope.closedrestaurants);}
    else{
- $rootScope.notify(response.data.data.black_zone_message );
+ 
+     toastr.info(response.data.data.black_zone_message, {
+  closeButton: true
+ 
+});
+    
    }
-  
-
-   
+//    $ionicLoading.hide();
   }, function errorCallback(response) {
        $ionicLoading.hide();
     // called asynchronously if an error occurs
     // or server returns response with an error status.
-  });    
+  });   
 
      };    
       
@@ -334,24 +343,11 @@ $http({
    });
 }
 
-   // navigator.geolocation.getCurrentPosition(onSuccess, onError,{maximumAge:60000,timeout:20000,enableHighAccuracy:true});
-$scope.lat = 12.9044624;
-$scope.lng = 77.66223830000001;
+    navigator.geolocation.getCurrentPosition(onSuccess, onError,{maximumAge:60000,timeout:20000,enableHighAccuracy:true});
+// $scope.lat = 12.9044624;
+// $scope.lng = 77.66223830000001;
 
-$http({
-  method: 'get',
-  url: 'https://www.swiggy.com/api/restaurants/list?lat=' + $scope.lat +'&lng='+ $scope.lng +'&carousel=true',
- 
-}).then(function successCallback(response) {
-  console.log(response);
-  $scope.closedrestaurants = response.data.data.rest_list[0].restaurants;
-   console.log($scope.closedrestaurants);
-   $ionicLoading.hide();
-  }, function errorCallback(response) {
-       $ionicLoading.hide();
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
-  });   
+
  $scope.restaurantsort = function(){
        $ionicModal.fromTemplateUrl('templates/newPass1.html', function(modal) {
         $scope.newTemplate = modal;
@@ -361,9 +357,65 @@ $http({
     
   }
 
+$scope.searchRD = function(){
+    
+    if($scope.searchString==="")
+    {
+ navigator.geolocation.getCurrentPosition(onSuccess, onError,{maximumAge:60000,timeout:20000,enableHighAccuracy:true});
+    }
+    else{
+         $http({
+  method: 'get',
+  url: 'https://www.swiggy.com/api/restaurants/search?str=' + $scope.searchString +'&lat=' + $scope.lat +'&lng='+ $scope.lng +'&page=',
+ 
+}).then(function successCallback(response) {
+  $ionicLoading.hide();
+  setTimeout(function() {
+      
+  },1000);
+  console.log(response);
+  $timeout(function(){
+  // Any code in here will automatically have an $scope.apply() run afterwards
+ $scope.searchquery = response.data.data;
+ 
+  // And it just works!
+},100);
+ 
+ 
+//  $scope.closedrestaurants = response.data.data.restaurants[2];
+ 
+});
+    }
+   
+}
+$scope.dishclick = function(searchresult){
+  
+    $http({
+  method: 'get',
+  url: 'https://www.swiggy.com/api/restaurants/search?str=' + searchresult +'&lat=' + $scope.lat +'&lng='+ $scope.lng +'&page=',
+ 
+}).then(function successCallback(response) {
+  $ionicLoading.hide();
+  setTimeout(function() {
+      
+  },1000);
+  console.log(response);
+   $timeout(function(){
+  // Any code in here will automatically have an $scope.apply() run afterwards
+  $scope.searchquery = response.data.data;
+ $scope.closedrestaurants = response.data.data.restaurants[0].restaurants;
+ 
+ 
+  // And it just works!
+},100);
+
+});
+   
+   
+}
 $scope.Locationedit = function(){
     
-    $state.go("notification")
+    $state.go("menu.restaurant.notification")
 }
 $scope.restaurantclick = function(closedrestaurant){
     $rootScope.slug = closedrestaurant.slugs.restaurant;
@@ -1064,148 +1116,6 @@ return !$scope.noData3;
 .controller('settingsCtrl', function($scope,$window, $ionicPopup, $rootScope,$ionicLoading,$ionicModal, $cordovaGeolocation) {
     
   
-     $scope.searchText="0";
-    
-      
-   $scope.check = function (searchText) {
-    console.log(searchText);
-    if(searchText=="1")
-   {$window.location.href = ('#/pattern');
-    }
-     if(searchText=="2")
-   
-  { $ionicModal.fromTemplateUrl('templates/newPass.html', function(modal) {
-        $scope.newTemplate = modal;
-    });
-$scope.newTemplate.show();
-       
-   }
-}
-
-  
-    
-  $scope.ni_toggle = $window.localStorage.getItem('ni_toggle') === 'false';
-    $scope.updateLocalStorage = function() {
-        $window.localStorage.setItem('ni_toggle', $scope.ni_toggle);
-        console.log($scope.ni_toggle);
-        if($scope.ni_toggle==false){
-              
-   
-     
-       $rootScope.positions = [{
-    lat: 43.07493,
-    lng: -89.381388
-  }];
-
-  $scope.$on('mapInitialized', function(event, map) {
-    $scope.map = map;
-  });
-
-  
-  $rootScope.positions = [];
-    
-    
-    $ionicLoading.show({
-      template: 'Loading...'
-    });
-
-     var onSuccess=  function(position) {
-      var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      $rootScope.positions.push({lat: pos.lat(),lng: pos.lng()});
-      console.log(pos);
-      $scope.map.setCenter(pos);
-      
-      
-    
-       
-     
-      };    
-      
-     var onError =  function onError(error) {
-    $ionicPopup.alert({
-     title: 'Turn on your gps',
-     template: 'Could not locate your device'
-   });
-}
-    navigator.geolocation.getCurrentPosition(onSuccess, onError,{maximumAge:6000,timeout:2000,enableHighAccuracy:true});
-
-      $ionicLoading.hide();
-    
-        }
-        else
-        {
-             $rootScope.positions = [{
-    lat: 43.07493,
-    lng: -89.381388
-  }];
-            
-            
-            
-        }
-        
-        };
-        
-     if($scope.ni_toggle==true){
-              
-   
-     
-       $rootScope.positions = [{
-    lat: 43.07493,
-    lng: -89.381388
-  }];
-
-  $scope.$on('mapInitialized', function(event, map) {
-    $scope.map = map;
-  });
-
-  
-  $rootScope.positions = [];
-    
-    
-    $ionicLoading.show({
-      template: 'Loading...'
-    });
-
-    var onSuccess=  function(position) {
-      var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      $rootScope.positions.push({lat: pos.lat(),lng: pos.lng()});
-      console.log(pos);
-      $scope.map.setCenter(pos);
-      
-      
-    
-       
-     
-      };    
-      
-     var onError =  function onError(error) {
-    $ionicPopup.alert({
-     title: 'Turn on your gps',
-     template: 'Could not locate your device'
-   });
-}
-    navigator.geolocation.getCurrentPosition(onSuccess, onError,{maximumAge:6000,timeout:2000,enableHighAccuracy:true});
-
-      $ionicLoading.hide();
-    
-        }
-        else
-        {
-             $rootScope.positions = [{
-    lat: 43.07493,
-    lng: -89.381388
-  }];
-            
-            
-            
-        }
-        
-       
-    
-    
-    
-    
-
 }) 
 
 
@@ -1299,9 +1209,9 @@ return $scope.cartItemarray;
 
    
   $ionicSlideBoxDelegate.update();
-				$scope.onSlideMove = function(data){
-					alert("You have selected " + data.index + " tab");
-				};
+				// $scope.onSlideMove = function(data){
+				// 	alert("You have selected " + data.index + " tab");
+				// };
     var slug = $rootScope.slug
    $http({
   method: 'get',
@@ -1330,6 +1240,33 @@ return $scope.cartItemarray;
        
    
   }
+
+   $scope.Finalcheckout = function(){
+       
+       var payload=  {
+           "order":{
+            "payment_cod_method":"Mobikwik",
+            "address_id":"1237634",
+            "order_comments":"",
+            "csrf_token":"34462345-f3d0-4810-b178-10cb26994c01a5bc62c7-8640-4262-a4f9-d92406e10fc4"}
+       }
+console.log(payload);
+      $http({
+  method: 'post',
+  url: 'https://www.swiggy.com/api/order/place',
+ headers : {'Content-Type': 'application/json;charset=UTF-8',
+} ,
+     
+  data: payload
+}).then(function successCallback(response) {
+   console.log(response);
+   
+  }, function errorCallback(response) {
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+  });
+
+   }
 });
     
 })
@@ -1616,49 +1553,8 @@ ble.read('D0:39:72:B7:80:4C', "FFF0", "FFF1", function(response) {
  })
 
 
-.controller('completedCtrl', function($rootScope, $scope, $window, $firebase) {
-    $rootScope.show("Please wait... Processing");
-    $scope.list = [];
-
-    var bucketListRef = new Firebase($rootScope.baseUrl + escapeEmailAddress($rootScope.userEmail));
-    bucketListRef.on('value', function(snapshot) {
-        $scope.list = [];
-        var data = snapshot.val();
-  
-
-        for (var key in data) {
-            if (data.hasOwnProperty(key)) {
-                
-        
-                
-                if (data[key].item5== $rootScope.positions[0].lat ) {
-                    data[key].key = key;
-                    $scope.list.push(data[key]);
-                }
-            }
-        }
-        if ($scope.list.length == 0) {
-            $scope.noData = true;
-        } else {
-            $scope.noData = false;
-        }
-
-        $rootScope.hide();
-    });
-
-    $scope.deleteItem = function(key) {
-        $rootScope.show("Please wait... Deleting from List");
-        var itemRef = new Firebase($rootScope.baseUrl + escapeEmailAddress($rootScope.userEmail));
-        bucketListRef.child(key).remove(function(error) {
-            if (error) {
-                $rootScope.hide();
-                $rootScope.notify('Oops! something went wrong. Try again later');
-            } else {
-                $rootScope.hide();
-                $rootScope.notify('Successfully deleted');
-            }
-        });
-    };
+.controller('scanCtrl', function($rootScope, $scope, $window) {
+   
 });
 
 

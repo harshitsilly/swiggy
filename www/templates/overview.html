@@ -12,20 +12,35 @@
       <span class="marginzero col col-90">
       <label class="item item-input ">
   <i class="icon ion-search placeholder-icon"></i>
-      <input class="searchsort" type="search" placeholder="Search restaurants,dishes.."></input>
+      <input class="searchsort" type="search" ng-model="searchString" ng-change="searchRD()" placeholder="Search restaurants,dishes.."></input>
       
 </label>
       </span>
       <button class="button button-clear button-dark icon ion-funnel" ng-click="restaurantsort()">
+        
       </button>
+    
+ 
     </ion-header-bar>
   <ion-content overflow-scroll="true" padding="true" class="has-header has-footer " ng-controller="overviewCtrl ">
     
-
+   
  
+     <div  ng-repeat="searchresult in searchquery.items">
+       <a ng-click="dishclick(searchresult)"> {{searchresult}}</a>
+      </div>
 
   
+ <div>
 
+      <ion-slides >
+    <ion-slide-page ng-repeat="carousel in carousels">
+    
+     <img class="carouselwidth" src="https://res.cloudinary.com/swiggy/image/upload/c_scale,f_auto,fl_lossy,h_134,q_80,w_269/{{carousel.creativeId}}">
+    </ion-slide-page>
+    
+  </ion-slides>
+    </div>
          
                     <div  ng-repeat="closedrestaurant in closedrestaurants | filter: search.value  | orderBy :  sort"  id="{{hospital.key}}">
          
@@ -84,7 +99,7 @@
      
     </ion-content>
     <ion-footer-bar align-title="left" class="bar-dark">
- 
+  <button class=" col col-33 marginzero button  button-assertive" ui-sref="menu.restaurant.checkout">CheckOut</button>
  
  
 </ion-footer-bar>

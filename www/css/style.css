@@ -106,7 +106,7 @@ border-radius: 3%;
 }
 
 .loading{
-  background-color: transparent!important;
+  /*background-color: transparent!important;*/
 }
 
 .ionicspinner {
@@ -128,11 +128,22 @@ color: #69BB27;
   color: lightgrey;
 }
 
+.carouselwidth{
+ max-height: 6rem!important;
+ min-width: max-content;
+ width: 100%!important;
+}
 
+.borderlocation{
+  border: 0!important;
+ 
+}
+.pac-container:after {
+    /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
 
-
-
-
+    background-image: none !important;
+    height: 0px;
+}
 
 
 /*

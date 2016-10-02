@@ -1,49 +1,6 @@
 <ion-view title="Settings">
     <ion-content overflow-scroll="true"  scroll="false" class="has-header profile1">
-        <div>
-           
-            <blockquote>
-                <p class="hars">Change Your Account Settings here.</p>
-            </blockquote>
-        </div>
-        <form >
-            <label class="row">
-                <span class="col col-90 hars input">Number of favourite cards</span>
-                <input class="col col-10 hars place" type=" number" placeholder="0-8">
-            </label>
-             <div class="spacer" style="height: .1rem;"></div>
-            <label class="row" >
-                <span class="col col-60 hars input">OneCard Pass</span>
-                
-                
-     <select   class="col col-40 hars place1" ng-model="searchText" ng-change="check(searchText)">
-         <option value="0" >None</option>
-    <option value="1">Pattern Lock</option>
-                    <option value="2">PIN (4 Digits)</option>
-</select>
-
-
-
-  
-
-
-            </label>
-            <div class="spacer" style="height: .1rem;"></div>
-            
-           <div class="row" >
-               <span class="col col-66 hars input place2">Location Based Personalization</span>
-            <ion-toggle class="hars place2" toggle-class="toggle-dark " ng-model="ni_toggle" ng-change="updateLocalStorage()"  > 
-                </ion-toggle>
-                 <div class="spacer" style="height: 5rem;"></div>
-           </div>
-            
-        </form>
-       
-        
-        
-        <div class="spacer" style="height: 100px;"></div>
-        <div class="spacer" style="height: 100px;"></div>
-        <a href="#" onclick="window.open('http://savzz.com', '_system', 'location=yes'); return false;" class="button button-light button-block button-clear  icon-left ion-android-arrow-forward ">About Us</a>
-        <div class="spacer" style="height: 100px;"></div>
+    <input type="text" ng-model="color" placeholder="Enter a color" />
+    <hello-world/>
     </ion-content>
 </ion-view>

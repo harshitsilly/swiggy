@@ -1,5 +1,5 @@
 angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.service.core','ksSwiper','ngCordova.plugins.cardIO','ngMap','ng-mfb','ionic.service.analytics','ngCordova','ionic-datepicker','ionic.service.push','angularReverseGeocode','ngMessages','firebase', 'ngStorage',
-'btford.socket-io','controllers','services'])
+'btford.socket-io','controllers','services','ngAnimate','toastr','ngAutocomplete'])
 
 
 .run( function($ionicPlatform,$rootScope,$ionicAnalytics, $firebaseAuth, $firebase, $window, $ionicLoading,$state,$localStorage) {
@@ -8,38 +8,38 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
 
     $ionicPlatform.ready(function() {
       
-        $rootScope.checkSession = function() {
-            var auth = new FirebaseSimpleLogin(authRef, function(error, user) {
-                if (error) {
-                    // no action yet.. redirect to default route
-                    $rootScope.userEmail = null;
+        // $rootScope.checkSession = function() {
+        //     var auth = new FirebaseSimpleLogin(authRef, function(error, user) {
+        //         if (error) {
+        //             // no action yet.. redirect to default route
+        //             $rootScope.userEmail = null;
                   
-                     $state.go('signin');
-                } else if (user) {
+        //              $state.go('signin');
+        //         } else if (user) {
                    
-                    // user authenticated with Firebase
-                    $rootScope.userEmail = user.email;
+        //             // user authenticated with Firebase
+        //             $rootScope.userEmail = user.email;
                    
-                     $state.go('menu.overview');
-                } else {
-                    // user is logged out
-                    $rootScope.userEmail = null;
+        //              $state.go('menu.overview');
+        //         } else {
+        //             // user is logged out
+        //             $rootScope.userEmail = null;
                    
-                     $state.go('signin');
-                }
-            });
-        }
+        //              $state.go('signin');
+        //         }
+        //     });
+        // }
       
-     $rootScope.$storage = $localStorage.$default({
-      seenIntro: false
-    });
-    console.log($rootScope.$storage.seenIntro);
+    //  $rootScope.$storage = $localStorage.$default({
+    //   seenIntro: false
+    // });
+    // console.log($rootScope.$storage.seenIntro);
 
-    if ($rootScope.$storage.seenIntro== false) {
+    // if ($rootScope.$storage.seenIntro== false) {
       
      
-      $state.go('signin');
-    } 
+    //   $state.go('signin');
+    // } 
   
   
   
@@ -56,9 +56,9 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
   
  
         // $rootScope.userEmail = null;
-        $rootScope.baseUrl = 'https://onecard2.firebaseio.com/';
-        var authRef = new Firebase($rootScope.baseUrl);
-        $rootScope.auth = $firebaseAuth(authRef);
+        // $rootScope.baseUrl = 'https://onecard2.firebaseio.com/';
+        // var authRef = new Firebase($rootScope.baseUrl);
+        // $rootScope.auth = $firebaseAuth(authRef);
         
 
         $rootScope.show = function(text) {
@@ -134,7 +134,18 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
 
   
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider,toastrConfig) {
+
+   angular.extend(toastrConfig, {
+    autoDismiss: false,
+    containerId: 'toast-container',
+    maxOpened: 0,    
+    newestOnTop: true,
+    positionClass: 'toast-top-right',
+    preventDuplicates: false,
+    preventOpenDuplicates: false,
+    target: 'body'
+  });
     $stateProvider
         
       
@@ -230,7 +241,29 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
         }
       }
     })
+
+     .state('menu.restaurant.checkout', {
+      url: '/scan',
+      
+      views: {
+        'restaurantdetails': {
+          templateUrl: 'templates/scan.html',
+          controller: 'scanCtrl'
+        }
+      }
+    })
     
+      .state('menu.restaurant.notification', {
+      url: '/notification',
+        views: {
+        'restaurantdetails': {
+          templateUrl: 'templates/notification.html',
+          controller: 'notificationCtrl'
+        }
+      }
+        
+       
+    })
           
     .state('menu.account', {
       url: '/account',
@@ -290,12 +323,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
     })
     
          
-    .state('notification', {
-      url: '/notification',
-         templateUrl: 'templates/notification.html',
-          controller: 'notificationCtrl'
-       
-    })
+  
         
       
         .state('menu.bucket', {
@@ -341,7 +369,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
             }
         })
         
-    $urlRouterProvider.otherwise('/menu/restaurant/overview');
+    $urlRouterProvider.otherwise('/signin');
 })
 
 .factory('mySocket', function (socketFactory) {
@@ -374,6 +402,24 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
 
   }
 
+})
+.directive('helloWorld', function() {
+  return {
+    restrict: 'AE',
+    replace: true,
+    template: '<p style="background-color:{{color}}">Hello World',
+    link: function(scope, elem, attrs) {
+      elem.bind('click', function() {
+        elem.css('background-color', 'white');
+        
+          scope.color = "white";
+        
+      });
+      elem.bind('mouseover', function() {
+        elem.css('cursor', 'pointer');
+      });
+    }
+  };
 });
 
 angular.module('florian.directives', [])
