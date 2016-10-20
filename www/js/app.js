@@ -1,8 +1,7 @@
-angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.service.core','ksSwiper','ngCordova.plugins.cardIO','ngMap','ng-mfb','ionic.service.analytics','ngCordova','ionic-datepicker','ionic.service.push','angularReverseGeocode','ngMessages','firebase', 'ngStorage',
-'btford.socket-io','controllers','services','ngAnimate','toastr','ngAutocomplete'])
+angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.service.analytics','ngCordova','ionic.service.push','angularReverseGeocode','controllers','services','ngAnimate','toastr','ngAutocomplete'])
 
 
-.run( function($ionicPlatform,$rootScope,$ionicAnalytics, $firebaseAuth, $firebase, $window, $ionicLoading,$state,$localStorage) {
+.run( function($ionicPlatform,$rootScope,$ionicAnalytics, $window, $ionicLoading,$state) {
   
     
 
