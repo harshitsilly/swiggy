@@ -1105,7 +1105,7 @@ return !$scope.noData3;
     
 })
 
-.controller('newPass1Ctrl', function($rootScope, $scope, $window, $ionicModal, $firebase) {
+.controller('newPass1Ctrl', function($rootScope, $scope, $window, $ionicModal) {
     
     
     $scope.sfclose = function() {
