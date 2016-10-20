@@ -14,7 +14,7 @@ var payload= {"mobile" : this.user.phone ,
 
 $http({
   method: 'post',
-  url: 'http://'+$rootScope.baseuRL+'/api/auth/signin',
+  url: 'https://'+$rootScope.baseuRL+'/api/auth/signin',
  headers : {'Content-Type': 'application/json'} ,
          
   data: payload
@@ -306,7 +306,7 @@ $scope.datePickerCallback = function (val) {
      
 $http({
   method: 'get',
-  url: 'http://'+$rootScope.baseuRL+'/api/restaurants/list?lat=' + $scope.lat +'&lng='+ $scope.lng +'&carousel=true',
+  url: 'https://'+$rootScope.baseuRL+'/api/restaurants/list?lat=' + $scope.lat +'&lng='+ $scope.lng +'&carousel=true',
  
 }).then(function successCallback(response) {
   $ionicLoading.hide();
@@ -366,7 +366,7 @@ $scope.searchRD = function(){
     else{
          $http({
   method: 'get',
-  url: 'http://'+$rootScope.baseuRL+'/api/restaurants/search?str=' + $scope.searchString +'&lat=' + $scope.lat +'&lng='+ $scope.lng +'&page=',
+  url: 'https://'+$rootScope.baseuRL+'/api/restaurants/search?str=' + $scope.searchString +'&lat=' + $scope.lat +'&lng='+ $scope.lng +'&page=',
  
 }).then(function successCallback(response) {
   $ionicLoading.hide();
@@ -392,7 +392,7 @@ $scope.dishclick = function(searchresult){
   
     $http({
   method: 'get',
-  url: 'http://'+$rootScope.baseuRL+'/api/restaurants/search?str=' + searchresult +'&lat=' + $scope.lat +'&lng='+ $scope.lng +'&page=',
+  url: 'https://'+$rootScope.baseuRL+'/api/restaurants/search?str=' + searchresult +'&lat=' + $scope.lat +'&lng='+ $scope.lng +'&page=',
  
 }).then(function successCallback(response) {
   $ionicLoading.hide();
@@ -1187,7 +1187,7 @@ return $scope.cartItemarray;
 
        $http({
   method: 'post',
-  url: 'http://'+$rootScope.baseuRL+'/api/cart/update',
+  url: 'https://'+$rootScope.baseuRL+'/api/cart/update',
  headers : {'Content-Type': 'application/json'} ,
          
   data: cart
@@ -1215,7 +1215,7 @@ return $scope.cartItemarray;
     var slug = $rootScope.slug
    $http({
   method: 'get',
-  url: 'http://'+$rootScope.baseuRL+'/api/restaurants/menu?slug=' + slug,
+  url: 'https://'+$rootScope.baseuRL+'/api/restaurants/menu?slug=' + slug,
  
 }).then(function successCallback(response) {
   console.log(response);
@@ -1253,7 +1253,7 @@ return $scope.cartItemarray;
 console.log(payload);
       $http({
   method: 'post',
-  url: 'http://'+$rootScope.baseuRL+'/api/order/place',
+  url: 'https://'+$rootScope.baseuRL+'/api/order/place',
  headers : {'Content-Type': 'application/json;charset=UTF-8',
 } ,
      
