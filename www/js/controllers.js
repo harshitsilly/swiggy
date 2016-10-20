@@ -14,7 +14,7 @@ var payload= {"mobile" : this.user.phone ,
 
 $http({
   method: 'post',
-  url: 'https://'+$rootScope.baseuRL+'/api/auth/signin',
+  url: $rootScope.baseuRL+'/api/auth/signin',
  headers : {'Content-Type': 'application/json'} ,
          
   data: payload
@@ -306,7 +306,7 @@ $scope.datePickerCallback = function (val) {
      
 $http({
   method: 'get',
-  url: 'https://'+$rootScope.baseuRL+'/api/restaurants/list?lat=' + $scope.lat +'&lng='+ $scope.lng +'&carousel=true',
+  url: $rootScope.baseuRL+'/api/restaurants/list?lat=' + $scope.lat +'&lng='+ $scope.lng +'&carousel=true',
  
 }).then(function successCallback(response) {
   $ionicLoading.hide();
@@ -315,7 +315,7 @@ $http({
   },1000);
   console.log(response);
   if(response.data.data.rest_list)
-  {  $scope.closedrestaurants = response.data.data.rest_list[0].restaurants;
+  {  $scope.closedrestaurants = response.data.data.rest_list[2].restaurants;
        $scope.carousels = response.data.data.carousel;
    console.log($scope.closedrestaurants);}
    else{
@@ -366,7 +366,7 @@ $scope.searchRD = function(){
     else{
          $http({
   method: 'get',
-  url: 'https://'+$rootScope.baseuRL+'/api/restaurants/search?str=' + $scope.searchString +'&lat=' + $scope.lat +'&lng='+ $scope.lng +'&page=',
+  url: $rootScope.baseuRL+'/api/restaurants/search?str=' + $scope.searchString +'&lat=' + $scope.lat +'&lng='+ $scope.lng +'&page=',
  
 }).then(function successCallback(response) {
   $ionicLoading.hide();
@@ -378,7 +378,7 @@ $scope.searchRD = function(){
   // Any code in here will automatically have an $scope.apply() run afterwards
  $scope.searchquery = response.data.data;
  
-  // And it just works!
+ 
 },100);
  
  
@@ -392,7 +392,7 @@ $scope.dishclick = function(searchresult){
   
     $http({
   method: 'get',
-  url: 'https://'+$rootScope.baseuRL+'/api/restaurants/search?str=' + searchresult +'&lat=' + $scope.lat +'&lng='+ $scope.lng +'&page=',
+  url: $rootScope.baseuRL+'/api/restaurants/search?str=' + searchresult +'&lat=' + $scope.lat +'&lng='+ $scope.lng +'&page=',
  
 }).then(function successCallback(response) {
   $ionicLoading.hide();
@@ -403,10 +403,10 @@ $scope.dishclick = function(searchresult){
    $timeout(function(){
   // Any code in here will automatically have an $scope.apply() run afterwards
   $scope.searchquery = response.data.data;
- $scope.closedrestaurants = response.data.data.restaurants[0].restaurants;
+ $scope.closedrestaurants = response.data.data.restaurants[2].restaurants;
  
  
-  // And it just works!
+ 
 },100);
 
 });
@@ -1187,7 +1187,7 @@ return $scope.cartItemarray;
 
        $http({
   method: 'post',
-  url: 'https://'+$rootScope.baseuRL+'/api/cart/update',
+  url: $rootScope.baseuRL+'/api/cart/update',
  headers : {'Content-Type': 'application/json'} ,
          
   data: cart
@@ -1215,7 +1215,7 @@ return $scope.cartItemarray;
     var slug = $rootScope.slug
    $http({
   method: 'get',
-  url: 'https://'+$rootScope.baseuRL+'/api/restaurants/menu?slug=' + slug,
+  url: $rootScope.baseuRL+'/api/restaurants/menu?slug=' + slug,
  
 }).then(function successCallback(response) {
   console.log(response);
@@ -1253,7 +1253,7 @@ return $scope.cartItemarray;
 console.log(payload);
       $http({
   method: 'post',
-  url: 'https://'+$rootScope.baseuRL+'/api/order/place',
+  url: $rootScope.baseuRL+'/api/order/place',
  headers : {'Content-Type': 'application/json;charset=UTF-8',
 } ,
      

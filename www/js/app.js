@@ -41,7 +41,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
     //   $state.go('signin');
     // } 
   
-    $rootScope.baseuRL = location.host;
+    $rootScope.baseuRL = location.origin;
   
       $ionicAnalytics.register();
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
