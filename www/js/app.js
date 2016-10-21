@@ -170,42 +170,9 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
     })
       
     
-    .state('intro', {
-    url: '/a',
-    templateUrl: "templates/intro.html",
-    controller: 'IntroCtrl'
-  })
-  
-  
-   .state('menu.test', {
-    url: '/test',
-     views: {
-        'side-menu21': {
-          templateUrl: 'templates/test.html',
-          controller: 'testCtrl'
-        }
-      }
-  
-  })
-  
-   .state('menu.form', {
-    url: '/form',
-     views: {
-        'side-menu21': {
-        templateUrl: "templates/intro.html",
-    controller: 'IntroCtrl'
-        }
-      }
     
-  })
-      
-      
-      .state('pattern', {
-    url: '/pattern',
-    templateUrl: "templates/pattern.html",
-    controller: 'patternCtrl'
-  })
-      
+  
+   
         
     .state('menu.restaurant', {
       url: '/restaurant',
@@ -264,109 +231,24 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
        
     })
           
-    .state('menu.account', {
-      url: '/account',
-      cache : false ,
-      views: {
-        'side-menu21': {
-          templateUrl: 'templates/account.html',
-          controller: 'accountCtrl'
-        }
-      }
-    })
+    // .state('menu.account', {
+    //   url: '/account',
+    //   cache : false ,
+    //   views: {
+    //     'side-menu21': {
+    //       templateUrl: 'templates/account.html',
+    //       controller: 'accountCtrl'
+    //     }
+    //   }
+    // })
         
-      
-   .state('menu.map', {
-      url: '/map',
-      views: {
-        'side-menu21': {
-          templateUrl: 'templates/map.html',
-          controller: 'mapCtrl'
-        }
-      }
-    })
-      
-        
-    .state('menu.settings', {
-      url: '/settings',
-      views: {
-        'side-menu21': {
-          templateUrl: 'templates/settings.html',
-          controller: 'settingsCtrl'
-        }
-      }
-    })
+   
     
-    .state('menu.bluetooth', {
-      url: '/bluetooth',
-      views: {
-        'side-menu21': {
-          templateUrl: 'templates/bluetooth.html',
-          controller: 'bluetoothCtrl'
-        }
-      }
-    })
-        
       
     
       
         
-    .state('menu.feedback', {
-      url: '/feedback',
-      views: {
-        'side-menu21': {
-          templateUrl: 'templates/feedback.html',
-          controller: 'feedbackCtrl'
-        }
-      }
-    })
     
-         
-  
-        
-      
-        .state('menu.bucket', {
-            url: "/bucket",
-            abstract: true,
-            views: {
-        'side-menu21': {
-          templateUrl: "templates/bucket.html"
-        }
-      }
-           
-        })
-        
-        
-        
-        
-        .state('menu.bucket.list', {
-            url: '/list',
-            views: {
-                'bucket-list': {
-                    templateUrl: 'templates/bucket-list.html',
-                    controller: 'myListCtrl'
-                }
-            }
-        })
-        .state('menu.bucket.completed', {
-            url: '/completed',
-            views: {
-                'bucket-completed': {
-                    templateUrl: 'templates/bucket-completed.html',
-                    controller: 'completedCtrl'
-                }
-            }
-        })
-        
-         .state('menu.bucket.notification', {
-            url: '/notification',
-            views: {
-                'bucket-completed': {
-                    templateUrl: 'templates/notification.html',
-                    controller: 'notificationCtrl'
-                }
-            }
-        })
         
     $urlRouterProvider.otherwise('/signin');
 })
