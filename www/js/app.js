@@ -250,7 +250,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
         
     
         
-    $urlRouterProvider.otherwise('/signin');
+    $urlRouterProvider.otherwise('/menu/restaurant/overview');
 })
 
 .factory('mySocket', function (socketFactory) {
