@@ -105,14 +105,11 @@ border-radius: 3%;
   height: 3.5rem!important;
 }
 
-.loading{
-  /*background-color: transparent!important;*/
-}
+
 
 .ionicspinner {
 min-height: 1.5rem;
 min-width: 1.5rem;
-
 }
 .searchsort{
   height: 100%!important;
@@ -145,7 +142,29 @@ color: #69BB27;
     height: 0px;
 }
 
+.activecolor.item.active{
+  background-color: darkorange!important;
+}
+.foodDesc{
+  width: 60% !important;
+  max-width: 60%!important;
+  font-size: .85rem;
+  
+}
 
+.moneyDesc{
+  font-size: .85rem; 
+}
+
+.scrollList .list{
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.menuHeaderFont{
+  font-size: 1.2rem!important;
+  
+}
 /*
 	Custom sass content goes here
 */

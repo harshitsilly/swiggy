@@ -296,13 +296,15 @@ $scope.datePickerCallback = function (val) {
  $ionicPlatform.ready(function() {
     
 	 $ionicLoading.show({
-      template: '<ion-spinner class="ionicspinner" icon="android"></ion-spinner>'
+      template: '<ion-spinner class="ionicspinner spinner-dark" icon="android"></ion-spinner>'
     });
 
 
      var onSuccess=  function(position) {
-      $scope.lat = position.coords.latitude;
-     $scope.lng = position.coords.longitude;
+         $scope.lat = 12.9106;
+ $scope.lng = 77.665;
+    //   $scope.lat = position.coords.latitude;
+    //  $scope.lng = position.coords.longitude;
      
 $http({
   method: 'get',
@@ -315,7 +317,7 @@ $http({
   },1000);
   console.log(response);
   if(response.data.data.rest_list)
-  {  $scope.closedrestaurants = response.data.data.rest_list[0].restaurants;
+  {  $scope.closedrestaurants = response.data.data.rest_list[2].restaurants;
        $scope.carousels = response.data.data.carousel;
    console.log($scope.closedrestaurants);}
    else{
@@ -344,8 +346,7 @@ $http({
 }
 
     navigator.geolocation.getCurrentPosition(onSuccess, onError,{maximumAge:60000,timeout:20000,enableHighAccuracy:true});
-// $scope.lat = 12.9044624;
-// $scope.lng = 77.66223830000001;
+
 
 
  $scope.restaurantsort = function(){
@@ -403,7 +404,7 @@ $scope.dishclick = function(searchresult){
    $timeout(function(){
   // Any code in here will automatically have an $scope.apply() run afterwards
   $scope.searchquery = response.data.data;
- $scope.closedrestaurants = response.data.data.restaurants[0].restaurants;
+ $scope.closedrestaurants = response.data.data.restaurants[2].restaurants;
  
  
  
@@ -1033,7 +1034,7 @@ $scope.pushRegister = function() {
   
 })
 
-.controller('newPassCtrl',  function($rootScope, $scope, $window, $ionicModal, $firebase) {
+.controller('newPassCtrl',  function($rootScope, $scope, $window, $ionicModal) {
     
     
      $scope.data = {
@@ -1142,7 +1143,7 @@ return !$scope.noData3;
 .controller('cardCtrl', function($scope,$rootScope,$http,$ionicSlideBoxDelegate,$ionicModal,$ionicLoading,$ionicPlatform) {
 $ionicPlatform.ready(function() {
      $ionicLoading.show({
-      template: '<ion-spinner class="ionicspinner" icon="android"></ion-spinner>'
+      template: '<ion-spinner class="ionicspinner spinner-dark" icon="android"></ion-spinner>'
     });
  $scope.toggleGroup = function(group) {
     if ($scope.isGroupShown(group)) {

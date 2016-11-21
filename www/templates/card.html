@@ -5,13 +5,13 @@
   <ion-nav-back-button>
   </ion-nav-back-button>
 </ion-nav-bar>
-    <ion-content overflow-scroll="true"   scroll="true">
+    <ion-content  class="overlay-content" >
 		
      	<tab-slide-box  ng-if="foodmenu">
 			    	<div class="tsb-icons ">
 			    		<div class="tsb-ic-wrp">
 							<ion-scroll direction="x" class="tsb-hscroll">
-								<a href="javascript:;" class="{{tab.icon}}" ng-repeat="menu in foodmenu" on-finish-render="test()">{{menu.name}}</a>
+								<a href="javascript:;" class="{{tab.icon}} menuHeaderFont" ng-repeat="menu in foodmenu" on-finish-render="test()">{{menu.name}}</a>
 							</ion-scroll>
 						</div>
 			    	</div>
@@ -19,22 +19,21 @@
 			            <ion-slide  ng-repeat="menu in foodmenu" >
 			               								
 
-  <ion-list>
+  <ion-list class="scrollList">
         <div ng-repeat="categories in menu.subCategories">
-          <ion-item class="item-stable"
+          <ion-item class="activecolor"
                     ng-click="toggleGroup(categories)"
                     ng-class="{active: isGroupShown(categories)}">
-					<div>
+					
               <i class="icon" ng-class="isGroupShown(categories) ? 'ion-chevron-down' : 'ion-chevron-right'"></i>
             &nbsp;
              {{categories.name}}
-					</div>
-          </ion-item>
+				 </ion-item>
           <ion-item class="item-accordion marginzero"
                     ng-repeat="fooditem in categories.menu"
                     ng-show="isGroupShown(categories)">
-					 <div class="list card  " ng-click="" ng-init="fooditem.quantity = 0">
-
+					 <div ng-click="" ng-init="fooditem.quantity = 0">
+					
 
 
   <div class="item item-image imagerest" ng-if = "fooditem.cloudinaryImageId">
@@ -42,18 +41,19 @@
      <span class="restclosedstatus">{{closedrestaurant.nextOpenMessage}}</span>
   </div>
 
-  <div class="item marginzero">
- {{fooditem.name}}
- <i class="icon ion-star energized"></i>
-  <span ng-bind="fooditem.price/100"></span>
+  <div class="row card marginzero">
+ <div class="foodDesc">{{fooditem.name}}</div>
+  <div><i class="rupeeenabled moneyDesc"> &#8377</i>
+  <span class="moneyDesc" ng-bind="fooditem.price/100"></span>
+  
    
     
 
-		<button class="button button-clear icon ion-android-remove-circle button-energized" ng-disabled="fooditem.quantity===0" ng-click="fooditem.quantity= fooditem.quantity -1"></button>
+		<button class="button  marginzero  button-clear icon ion-android-remove-circle button-energized" ng-disabled="fooditem.quantity===0" ng-click="fooditem.quantity= fooditem.quantity -1"></button>
 		 {{fooditem.quantity}}
-		<button class=" button button-clear icon ion-android-add-circle button-energized" ng-click="fooditem.quantity= fooditem.quantity +1;cartUpdate(fooditem)"></button>
+		<button class=" button marginzero  button-clear icon ion-android-add-circle button-energized" ng-click="fooditem.quantity= fooditem.quantity +1;cartUpdate(fooditem)"></button>
 		
-		
+		</div>
 
    
   </div>

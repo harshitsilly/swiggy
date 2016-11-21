@@ -165,7 +165,6 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
         
         .state('menu', {
       url: '/menu',
-      abstract:true,
       templateUrl: 'templates/menu.html'
     })
       
@@ -176,7 +175,6 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
         
     .state('menu.restaurant', {
       url: '/restaurant',
-      abstract : true,
        views: {
         'side-menu21': {
           templateUrl: 'templates/restaurant.html',

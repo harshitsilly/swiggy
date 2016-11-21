@@ -51,19 +51,7 @@
     overflow: hidden;
 }
 
-.tabbed-slidebox .tsb-icons:after {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 1.4em 1.4em 1.4em;
-    border-color: transparent transparent #0398dc transparent;
-    position: absolute;
-    content: "";
-    display: block;
-    bottom: -12px;
-    left: 50%;
-    margin-left: -14px;
-}
+
 .tsb-hscroll.scroll-view{
   	white-space: nowrap;
 	margin:0 auto;
