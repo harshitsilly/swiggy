@@ -31,16 +31,16 @@
       </div>
 
   
- <div>
 
-      <ion-slides >
+
+      <ion-slides class="carouselheight" >
     <ion-slide-page ng-repeat="carousel in carousels">
     
      <img class="carouselwidth" src="https://res.cloudinary.com/swiggy/image/upload/c_scale,f_auto,fl_lossy,h_134,q_80,w_269/{{carousel.creativeId}}">
     </ion-slide-page>
     
   </ion-slides>
-    </div>
+  
          
                     <div  ng-repeat="closedrestaurant in closedrestaurants | filter: search.value  | orderBy :  sort"  id="{{hospital.key}}">
          
@@ -92,8 +92,7 @@
          
     
   
-      
-      
+      <ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
     
     
      

@@ -113,6 +113,7 @@ min-width: 1.5rem;
 }
 .searchsort{
   height: 100%!important;
+  width: 100%!important;
 }
 
 .backgroundimage {
@@ -133,6 +134,7 @@ color: #69BB27;
 
 .borderlocation{
   border: 0!important;
+  width: 100%!important;
  
 }
 .pac-container:after {
@@ -162,8 +164,18 @@ color: #69BB27;
   overflow-y: scroll;
 }
 .menuHeaderFont{
-  font-size: 1.2rem!important;
-  
+  font-size: 1.2rem!important; 
+}
+
+.carouselheight{
+  height: 20%;
+}
+
+/*.buttons.buttons-right.header-item {
+  width: 90%!important;
+}*/
+.buttons.buttons-right.header-item span {
+  width: 100%!important;
 }
 /*
 	Custom sass content goes here

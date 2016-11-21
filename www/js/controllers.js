@@ -298,17 +298,31 @@ $scope.datePickerCallback = function (val) {
 	 $ionicLoading.show({
       template: '<ion-spinner class="ionicspinner spinner-dark" icon="android"></ion-spinner>'
     });
+ $scope.closedrestaurants = [] ;
+$scope.page = 0 ;
+$scope.noMoreItemsAvailable = false;
 
-
+ 
+    $scope.loadMore = function() {
+        $scope.page =  $scope.page + 1 ;
+  onSuccess();
+   
+    if($scope.closedrestaurants.length >=40)
+        {
+            $scope.noMoreItemsAvailable=true;
+        }
+    $scope.$broadcast('scroll.infiniteScrollComplete');
+  };
+  
      var onSuccess=  function(position) {
          $scope.lat = 12.9106;
  $scope.lng = 77.665;
     //   $scope.lat = position.coords.latitude;
     //  $scope.lng = position.coords.longitude;
-     
+ 
 $http({
   method: 'get',
-  url: $rootScope.baseuRL+'/api/restaurants/list?lat=' + $scope.lat +'&lng='+ $scope.lng +'&carousel=true',
+  url: $rootScope.baseuRL+'/api/restaurants/list?lat=' + $scope.lat +'&lng='+ $scope.lng +'&carousel=true&page=' + $scope.page,
  
 }).then(function successCallback(response) {
   $ionicLoading.hide();
@@ -317,9 +331,13 @@ $http({
   },1000);
   console.log(response);
   if(response.data.data.rest_list)
-  {  $scope.closedrestaurants = response.data.data.rest_list[2].restaurants;
-       $scope.carousels = response.data.data.carousel;
-   console.log($scope.closedrestaurants);}
+  {  angular.merge($scope.closedrestaurants ,response.data.data.rest_list[2].restaurants);
+      if(! $scope.carousels){
+               $scope.carousels = response.data.data.carousel;
+   }
+   console.log($scope.closedrestaurants);
+  
+}
    else{
  
      toastr.info(response.data.data.black_zone_message, {
