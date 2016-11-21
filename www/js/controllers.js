@@ -335,6 +335,7 @@ $http({
       if(! $scope.carousels){
                $scope.carousels = response.data.data.carousel;
    }
+   $scope.noMoreItemsAvailable = true;
    console.log($scope.closedrestaurants);
   
 }
