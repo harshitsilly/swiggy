@@ -36,7 +36,17 @@ gulp.task('install', ['git-check'], function() {
       gutil.log('bower', gutil.colors.cyan(data.id), data.message);
     });
 });
+gulp.task('generate-service-worker', function(callback) {
+  var path = require('path');
+  var swPrecache = require('sw-precache');
+  var rootDir = 'www';
 
+  swPrecache.write(path.join(rootDir, 'service-worker.js'), {
+    staticFileGlobs: [rootDir + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
+    stripPrefix: rootDir,
+    maximumFileSizeToCacheInBytes: 1024 * 1024 * 5
+  }, callback);
+});
 gulp.task('git-check', function(done) {
   if (!sh.which('git')) {
     console.log(
