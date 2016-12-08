@@ -331,7 +331,7 @@ $http({
   },1000);
   console.log(response);
   if(response.data.data.rest_list)
-  {  angular.merge($scope.closedrestaurants ,response.data.data.rest_list[2].restaurants);
+  {  angular.merge($scope.closedrestaurants ,response.data.data.rest_list[0].restaurants);
       if(! $scope.carousels){
                $scope.carousels = response.data.data.carousel;
    }
@@ -423,7 +423,7 @@ $scope.dishclick = function(searchresult){
    $timeout(function(){
   // Any code in here will automatically have an $scope.apply() run afterwards
   $scope.searchquery = response.data.data;
- $scope.closedrestaurants = response.data.data.restaurants[2].restaurants;
+ $scope.closedrestaurants = response.data.data.restaurants[0].restaurants;
  
  
  

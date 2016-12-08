@@ -161,7 +161,7 @@ color: #69BB27;
 .scrollList .list{
   height: 100%;
   overflow-x: hidden;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
 }
 .menuHeaderFont{
   font-size: 1.2rem!important; 
