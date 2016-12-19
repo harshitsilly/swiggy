@@ -68,7 +68,7 @@
   
   <noscript>Web app needs javascript enabled  browser</noscript>
     <!--<script src="cordova.js"></script> -->
-   
+     
   </head>
   
  <!--<body ng-app="bucketList" ng-controller="settingsCtrl" animation="slide-left-right-ios7">-->
@@ -173,6 +173,16 @@
      <!--<script src="lib/ngstorage/ngStorage.js"></script>-->
      <!--<link href="lib/patternlock/patternLock.css" rel="stylesheet" type="text/css">-->
 <script src="lib/jquery/dist/jquery.min.js"></script>
+<script >
+     if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js').then((registration) => { 
+    // Registration was successful 
+    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+  }).catch((err) => {
+     // registration failed 
+     console.log('ServiceWorker registration failed: ', err); });
+}
+</script>
 <!--<script src="lib/patternlock/patternLock.js"></script>-->
 <!--<script src="lib/ng-material-floating-button/src/mfb-directive.js"></script>-->
   
@@ -191,15 +201,6 @@
     <script src="dist/services.js"></script>
     <script src="dist/tabSlideBox.js"></script>
     <script src="dist/angular-reverse-geocode.js"></script>
-      <script async>
-     if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js').then((registration) => { 
-    // Registration was successful 
-    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-  }).catch((err) => {
-     // registration failed 
-     console.log('ServiceWorker registration failed: ', err); });
-}
-</script>
+    
   </body>
 </html>
