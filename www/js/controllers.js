@@ -292,7 +292,7 @@ $scope.datePickerCallback = function (val) {
 })
 
 
-.controller('overviewCtrl',  function($scope,$rootScope,$ionicModal,$location,$state,$http,$ionicPopup,$ionicLoading,$ionicPlatform,toastr,$timeout) {
+.controller('overviewCtrl',  function($scope,$rootScope,$ionicModal,$location,$state,$http,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout) {
  $ionicPlatform.ready(function() {
     
 	 $ionicLoading.show({
@@ -339,14 +339,7 @@ $http({
    console.log($scope.closedrestaurants);
   
 }
-   else{
- 
-     toastr.info(response.data.data.black_zone_message, {
-  closeButton: true
- 
-});
-    
-   }
+   
 //    $ionicLoading.hide();
   }, function errorCallback(response) {
        $ionicLoading.hide();

@@ -1,4 +1,4 @@
-angular.module('bucketList', ['ionic','ionic.native','tabSlideBox','florian.directives','ionic.service.analytics','ngCordova','ionic.service.push','angularReverseGeocode','controllers','services','ngAnimate','toastr','ngAutocomplete'])
+angular.module('bucketList', ['ionic','ionic.native','tabSlideBox','florian.directives','ionic.service.analytics','ngCordova','ionic.service.push','angularReverseGeocode','controllers','services','ngAnimate','ngAutocomplete'])
 
 
 .run( function($ionicPlatform,$rootScope,$ionicAnalytics, $window, $ionicLoading,$state) {
@@ -133,18 +133,9 @@ angular.module('bucketList', ['ionic','ionic.native','tabSlideBox','florian.dire
 
   
 
-.config(function($stateProvider, $urlRouterProvider,toastrConfig) {
+.config(function($stateProvider, $urlRouterProvider) {
 
-   angular.extend(toastrConfig, {
-    autoDismiss: false,
-    containerId: 'toast-container',
-    maxOpened: 0,    
-    newestOnTop: true,
-    positionClass: 'toast-top-right',
-    preventDuplicates: false,
-    preventOpenDuplicates: false,
-    target: 'body'
-  });
+  
     $stateProvider
         
       
