@@ -1,4 +1,4 @@
-angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.service.analytics','ngCordova','ionic.service.push','angularReverseGeocode','controllers','services','ngAnimate','toastr','ngAutocomplete'])
+angular.module('bucketList', ['ionic','ionic.native','tabSlideBox','florian.directives','ionic.service.analytics','ngCordova','ionic.service.push','angularReverseGeocode','controllers','services','ngAnimate','toastr','ngAutocomplete'])
 
 
 .run( function($ionicPlatform,$rootScope,$ionicAnalytics, $window, $ionicLoading,$state) {
@@ -62,7 +62,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
 
         $rootScope.show = function(text) {
             $rootScope.loading = $ionicLoading.show({
-                content: text ? text : 'Loading..',
+                template : text ? text : 'Loading..',
                 animation: 'fade-in',
                 showBackdrop: true,
                 maxWidth: 200,
@@ -93,33 +93,33 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
         
 //  push  notifcation
         
-         var io = Ionic.io();
-    var push = new Ionic.Push({
-      "onNotification": function(notification) {
-        alert('Received push notification!');
-      },
-      "pluginConfig": {
-        "android": {
-          "iconColor": "#0000FF"
-        }
-      }
-    });
-    var user1 = Ionic.User.current();
+    //      var io = Ionic.io();
+    // var push = new Ionic.Push({
+    //   "onNotification": function(notification) {
+    //     alert('Received push notification!');
+    //   },
+    //   "pluginConfig": {
+    //     "android": {
+    //       "iconColor": "#0000FF"
+    //     }
+    //   }
+    // });
+    // var user1 = Ionic.User.current();
     
-    if (!user1.id) {
-      user1.id = Ionic.User.anonymousId();
-    }
+    // if (!user1.id) {
+    //   user1.id = Ionic.User.anonymousId();
+    // }
     
-    // Just add some dummy data..
-    user1.set('name', 'Simon');
-    user1.set('bio', 'This is my little bio');
-    user1.save();
+    // // Just add some dummy data..
+    // user1.set('name', 'Simon');
+    // user1.set('bio', 'This is my little bio');
+    // user1.save();
    
-    var callback = function(data) {
-      push.addTokenToUser(user1);
-      user1.save();
-    };
-    push.register(callback);
+    // var callback = function(data) {
+    //   push.addTokenToUser(user1);
+    //   user1.save();
+    // };
+    // push.register(callback);
     
         
         
@@ -206,16 +206,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
       }
     })
 
-     .state('menu.restaurant.checkout', {
-      url: '/scan',
-      
-      views: {
-        'restaurantdetails': {
-          templateUrl: 'templates/scan.html',
-          controller: 'scanCtrl'
-        }
-      }
-    })
+     
     
       .state('menu.restaurant.notification', {
       url: '/notification',

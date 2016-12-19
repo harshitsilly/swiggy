@@ -2073,41 +2073,6 @@ $dark:                            #444 !default;
 
 
  
-/*
-.authorIconFacebook {
-	background: url(/build/resources/images/master-sprite-8aa32b3017fdffe090fd2de19c6e65a2.png) no-repeat 0 -6732px;
-}
-
-.authorIconTwitter {
-	background: url(/build/resources/images/master-sprite-8aa32b3017fdffe090fd2de19c6e65a2.png) no-repeat 0 -6820px;
-}
-
-.authorIconWebsite {
-	background: url(/build/resources/images/master-sprite-8aa32b3017fdffe090fd2de19c6e65a2.png) no-repeat 0 -7172px;
-}
-*/
-.author-icon-row {
-  position: relative;
-  margin-top: 3px;
-  margin-bottom: 96px;
-  background-color: #ffffff;
-  width: 100%; }
-
-.author-icon-row span {
-  display: inline-block;
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  border: 1px solid #e6e6e6;
-  position: absolute;
-  left: 50%;
-  margin-left: -38px;
-  background-position: center center;
-  background-size: cover; }
-
-.centerBlock {
-  margin: 0 auto;
-  max-width: 1024px; }
 
 /*
 	Components
