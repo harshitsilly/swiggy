@@ -21,7 +21,16 @@
 
    <!--<link href="lib/custom/tab/tabSlideBox.css" rel="stylesheet">-->
    <!--<link href="css/ionic.app.css" rel="stylesheet">-->
-   <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+  
+  <noscript>Web app needs javascript enabled  browser</noscript>
+    <!--<script src="cordova.js"></script> -->
+   
+  </head>
+ <!--<body ng-app="bucketList" ng-controller="settingsCtrl" animation="slide-left-right-ios7">-->
+   <body ng-app="bucketList"   animation="slide-left-right-ios7">
+    
+    <ion-nav-view></ion-nav-view>
+     <script src="lib/ionic/js/ionic.bundle.min.js"></script>
   <!--<script src="https://code.ionicframework.com/nightly/js/ionic.bundle.min.js"></script>-->
  
   <!--<script src="lib\Framework7\dist\js\framework7.js.map"></script>-->
@@ -90,7 +99,7 @@
     <script src="dist/services.js"></script>
     <script src="dist/tabSlideBox.js"></script>
     <script src="dist/angular-reverse-geocode.js"></script>
-      <script>
+      <script async>
      if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js').then((registration) => { 
     // Registration was successful 
@@ -100,13 +109,5 @@
      console.log('ServiceWorker registration failed: ', err); });
 }
 </script>
-  <noscript>Web app needs javascript enabled  browser</noscript>
-    <!--<script src="cordova.js"></script> -->
-   
-  </head>
- <!--<body ng-app="bucketList" ng-controller="settingsCtrl" animation="slide-left-right-ios7">-->
-   <body ng-app="bucketList"   animation="slide-left-right-ios7">
-    
-    <ion-nav-view></ion-nav-view>
   </body>
 </html>
