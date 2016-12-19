@@ -1,4 +1,4 @@
-angular.module('bucketList', ['ionic','ionic.native','tabSlideBox','florian.directives','ionic.service.analytics','ngCordova','ionic.service.push','angularReverseGeocode','controllers','services','ngAnimate','ngAutocomplete'])
+angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.service.analytics','ngCordova','ionic.service.push','angularReverseGeocode','controllers','services','ngAnimate','ngAutocomplete'])
 
 
 .run( function($ionicPlatform,$rootScope,$ionicAnalytics, $window, $ionicLoading,$state) {
