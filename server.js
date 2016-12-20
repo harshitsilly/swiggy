@@ -1,10 +1,10 @@
 var express = require('express');
-// var gulp = require('gulp');
-// require('./gulpfile.js');
+var gulp = require('gulp');
+require('./gulpfile.js');
 var proxy = require('http-proxy-middleware');
 
 var app = express();
-// gulp.start("generate-service-worker");
+// gulp.start("watch");
 app.use('/api/*', proxy({target: 'https://www.swiggy.com', changeOrigin: true}));
 
 app.use(express.static('www'));

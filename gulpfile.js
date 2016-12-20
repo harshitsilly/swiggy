@@ -16,11 +16,14 @@ var paths = {
   sass: ['./scss/**/*.scss'],
   templateCache: ['./www/templates/**/*.html'],
   ng_annotate: ['./www/js/*.js'],
-  useref: ['./www/*.html']
+  // useref: ['./www/*.html'],
+  compress : ['./www/dist/dist_js/app/*.js'],
+  minicss : ['./www/css/style.css'],
+   sw : ['./www/*','!./www/index.html']
 };
 
-gulp.task('default', ['sass', 'templatecache', 'ng_annotate', 'useref']);
-
+gulp.task('default', ['sass', 'templatecache', 'ng_annotate', 'compress','minify-css','generate-service-worker']);
+gulp.task('serve:before', ['default']);
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
     .pipe(sass())
@@ -35,10 +38,13 @@ gulp.task('sass', function(done) {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
+   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.templatecache, ['templatecache']);
   gulp.watch(paths.ng_annotate, ['ng_annotate']);
-  gulp.watch(paths.useref, ['useref']);
+  // // gulp.watch(paths.useref, ['useref']);
+  gulp.watch(paths.compress, ['compress']);
+   gulp.watch(paths.minicss, ['minify-css']);
+   gulp.watch(paths.sw, ['generate-service-worker']);
 });
 
 gulp.task('install', ['git-check'], function() {
@@ -96,15 +102,15 @@ gulp.task('useref', function (done) {
 });
 
 
-gulp.task('compress', function () {
+gulp.task('compress',['ng_annotate'], function (done) {
   // returns a Node.js stream, but no handling of error messages
-  return gulp.src('./www/dist/dist_js/app/*.js')
+  gulp.src('./www/dist/dist_js/app/*.js')
     .pipe(uglify())
-    .pipe(gulp.dest('./www/dist'));
+    .pipe(gulp.dest('./www/dist')).on('end', done);;
 });
 
-gulp.task('minify-css', function() {
-  return gulp.src('./www/css/style.css')
+gulp.task('minify-css', function(done) {
+  gulp.src('./www/css/style.css')
     .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('./www/dist'));
+    .pipe(gulp.dest('./www/dist')).on('end', done);;
 });

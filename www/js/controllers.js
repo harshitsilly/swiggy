@@ -319,10 +319,10 @@ $scope.noMoreItemsAvailable = false;
  $scope.lng = 77.665;
     //   $scope.lat = position.coords.latitude;
     //  $scope.lng = position.coords.longitude;
- 
+ var partialUrl = '/api/restaurants/list?lat=' + $scope.lat +'&lng='+ $scope.lng +'&carousel=true&page=' + $scope.page ;
 $http({
   method: 'get',
-  url: $rootScope.baseuRL+'/api/restaurants/list?lat=' + $scope.lat +'&lng='+ $scope.lng +'&carousel=true&page=' + $scope.page,
+  url: $rootScope.baseuRL+ partialUrl,
  
 }).then(function successCallback(response) {
   $ionicLoading.hide();
@@ -335,8 +335,10 @@ $http({
       if(! $scope.carousels){
                $scope.carousels = response.data.data.carousel;
    }
+    // caches.put(partialUrl, response);
    $scope.noMoreItemsAvailable = true;
    console.log($scope.closedrestaurants);
+//    localStorage.setItem( partialUrl, response);
   
 }
    

@@ -7,15 +7,18 @@
       "proxyUrl": "https://www.swiggy.com/api"
     }
   ],
-  "gulpStartupTasks": [
-    "sass",
-    "templatecache",
-    "ng_annotate",
-    "useref",
-    "watch"
-  ],
-  "watchPatterns": [
-    "www/**/*",
-    "!www/lib/**/*"
-  ]
+ "v2": false,
+  "typescript": false,
+  "watch": {
+    "sass": ["scss/**/*.scss"],
+    "templatecache" : ["./www/templates/**/*.html"],
+    "ng_annotate" : ["./www/js/*.js"],
+    "compress" : ["./www/dist/dist_js/app/*.js"],
+    "minify-css" : ["./www/css/style.css"],
+    "generate-service-worker" : ["./www/*"],
+    "livereload": [
+      "./www/dist/*"
+    ]
+  }
 }
+
