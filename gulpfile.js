@@ -22,7 +22,7 @@ var paths = {
    sw : ['./www/*','!./www/index.html']
 };
 
-gulp.task('default', ['sass', 'templatecache', 'ng_annotate', 'compress','minify-css','generate-service-worker']);
+gulp.task('default', ['sass', 'templatecache', 'ng_annotate', 'compress','minify-css']);
 gulp.task('serve:before', ['default']);
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')

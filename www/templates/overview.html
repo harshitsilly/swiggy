@@ -90,11 +90,18 @@
                          
  </div>
          
-    
+    <!--<ion-infinite-scroll
+  ng-if={{noMoreItemsAvailable}}
+  icon="ion-loading-c"
+  on-infinite="loadMoreData()"
+  distance="10%">
+</ion-infinite-scroll>-->
   
-      <!--<ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+      <!--<ion-infinite-scroll ng-if="noMoreItemsAvailable"
+    on-infinite="loadMoreData()"
+    distance="2%">
+  </ion-infinite-scroll>
     -->
-    
      
     </ion-content>
     <ion-footer-bar align-title="left" class="bar-dark">

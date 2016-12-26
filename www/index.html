@@ -121,7 +121,140 @@
     </div>
     <!-- END: App-Loading Screen. -->
 
-    <ion-nav-view></ion-nav-view>
+    <!--<div>     
+        Enable Push Notification 	<button class=" js-push-btn button button-clear button-blue ion-checkmark-round"  ng-click="sigin()">
+				
+			</button>
+            <button class=" js-push-btn button button-clear button-blue ion-close-round"  ng-click="sigin()">
+				
+			</button>
+        </div>-->
+       <ion-nav-view>
+       
+    </ion-nav-view>
+   
+     <script >
+
+    const applicationServerPublicKey = 'AAAAfrz8ZNs:APA91bEwYSxun8jrpRvhAbXbbTJ8tnxmf4Zcp9Gs9fudcPq0-_Dq4OxI-lt1lEdjpLd4Zwcfdr16pArWJJ_2Qp4fRCqaNsAXUG8gPH8_N4E2vuNnNLH9mMqqaR6S0CM0L49Q13T4M00Sa07hTRLhpEYcta5vX0fmcQ';
+const pushButton = document.querySelector('.js-push-btn');
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+  console.log('Service Worker and Push is supported');
+
+  navigator.serviceWorker.register('service-worker.js')
+  .then((swReg)  => {
+    console.log('Service Worker is registered', swReg);
+    swRegistration = swReg;
+    initialiseUI();
+   
+  })
+  .catch((error) => {
+    console.error('Service Worker Error', error);
+  });
+} else {
+  console.warn('Push messaging is not supported');
+  pushButton.textContent = 'Push Not Supported';
+}
+
+function urlB64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+function initialiseUI() {
+     pushButton.addEventListener('click', function() {
+    // pushButton.disabled = true;
+    if (isSubscribed) {
+      // TODO: Unsubscribe user
+      unsubscribeUser();
+    } else {
+      subscribeUser();
+    }
+  });
+  // Set the initial subscription value
+  swRegistration.pushManager.getSubscription()
+  .then(function(subscription) {
+    isSubscribed = !(subscription === null);
+
+    if (isSubscribed) {
+      console.log('User IS subscribed.');
+    } else {
+      console.log('User is NOT subscribed.');
+    }
+
+    updateBtn();
+  });
+}
+function updateBtn() {
+  if (isSubscribed) {
+    pushButton.textContent = 'Disable Push Notification';
+  } else {
+    pushButton.textContent = 'Enable Push Notification';
+  }
+
+//   pushButton.disabled = false;
+}
+
+function subscribeUser() {
+  swRegistration.pushManager.subscribe({
+    userVisibleOnly: true,
+  })
+  .then(function(subscription) {
+    console.log('User is subscribed:', subscription);
+    console.log(JSON.stringify(subscription));
+    // chrome.gcm.register(JSON.stringify(subscription), registerCallback);
+    // updateSubscriptionOnServer(subscription);
+
+    isSubscribed = true;
+
+    updateBtn();
+  })
+  .catch(function(err) {
+    console.log('Failed to subscribe the user: ', err);
+    updateBtn();
+  });
+}
+function unsubscribeUser() {
+  swRegistration.pushManager.getSubscription()
+  .then(function(subscription) {
+    if (subscription) {
+      return subscription.unsubscribe();
+    }
+  })
+  .catch(function(error) {
+    console.log('Error unsubscribing', error);
+  })
+  .then(function() {
+    // updateSubscriptionOnServer(null);
+// chrome.gcm.unregister(unregisterCallback);
+    console.log('User is unsubscribed.');
+    isSubscribed = false;
+
+    updateBtn();
+  });
+}
+
+
+//      if ('serviceWorker' in navigator) {
+//   navigator.serviceWorker.register('service-worker.js').then((registration) => { 
+//     // Registration was successful 
+//     console.log('ServiceWorker registration successful with scope: ', registration.scope);
+//   }).catch((err) => {
+//      // registration failed 
+//      console.log('ServiceWorker registration failed: ', err); });
+// }
+</script>
+   
+    
      <script src="lib/ionic/js/ionic.bundle.min.js"></script>
   <!--<script src="https://code.ionicframework.com/nightly/js/ionic.bundle.min.js"></script>-->
  
@@ -189,19 +322,10 @@
     
    
     <!--<script src="dist/controllers.js"></script>-->
-    <script src="dist/controllers.js"></script>
+    <script src="js/controllers.js"></script>
     <script src="dist/services.js"></script>
     <script src="dist/tabSlideBox.js"></script>
     <script src="dist/angular-reverse-geocode.js"></script>
-    <script >
-     if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js').then((registration) => { 
-    // Registration was successful 
-    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-  }).catch((err) => {
-     // registration failed 
-     console.log('ServiceWorker registration failed: ', err); });
-}
-</script>
+
   </body>
 </html>  

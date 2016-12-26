@@ -3,11 +3,14 @@
   "short_name": "Swiggy",
   "start_url": "index.html",
   "display": "standalone",
+  "manifest_version": 2,
   "icons": [{
     "src": "templates/img/Swiggy.png",
     "sizes": "512x512",
     "type": "image/png"
   }],
+  "permissions": ["gcm"],
   "background_color": "#FF9800",
-  "theme_color": "#FF9800"
+  "theme_color": "#FF9800",
+  "gcm_sender_id": "544336536795"
 }

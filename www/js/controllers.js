@@ -294,32 +294,30 @@ $scope.datePickerCallback = function (val) {
 
 .controller('overviewCtrl',  function($scope,$rootScope,$ionicModal,$location,$state,$http,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout) {
  $ionicPlatform.ready(function() {
-    
+     $scope.$on('$stateChangeSuccess', function() {
+    $scope.loadMoreData();
+  });
 	 $ionicLoading.show({
       template: '<ion-spinner class="ionicspinner spinner-dark" icon="android"></ion-spinner>'
     });
  $scope.closedrestaurants = [] ;
 $scope.page = 0 ;
-$scope.noMoreItemsAvailable = false;
+$scope.noMoreItemsAvailable = true;
 
  
-    $scope.loadMore = function() {
+    $scope.loadMoreData = function() {
         $scope.page =  $scope.page + 1 ;
   onSuccess();
    
-    if($scope.closedrestaurants.length >=40)
-        {
-            $scope.noMoreItemsAvailable=true;
-        }
-    $scope.$broadcast('scroll.infiniteScrollComplete');
+   
   };
   
      var onSuccess=  function(position) {
-         $scope.lat = 12.9106;
- $scope.lng = 77.665;
+         $scope.lat = 12.926007;
+ $scope.lng = 77.67115119999994;
     //   $scope.lat = position.coords.latitude;
     //  $scope.lng = position.coords.longitude;
- var partialUrl = '/api/restaurants/list?lat=' + $scope.lat +'&lng='+ $scope.lng +'&carousel=true&page=' + $scope.page ;
+ var partialUrl = '/api/restaurants/list?lat=' + $scope.lat +'&lng='+ $scope.lng +'&carousel=true&sort=RELEVANCE&page=' + $scope.page ;
 $http({
   method: 'get',
   url: $rootScope.baseuRL+ partialUrl,
@@ -336,9 +334,14 @@ $http({
                $scope.carousels = response.data.data.carousel;
    }
     // caches.put(partialUrl, response);
-   $scope.noMoreItemsAvailable = true;
+  
    console.log($scope.closedrestaurants);
 //    localStorage.setItem( partialUrl, response);
+ if($scope.closedrestaurants.length >=40)
+        {
+            $scope.noMoreItemsAvailable=false;
+        }
+    $scope.$broadcast('scroll.infiniteScrollComplete');
   
 }
    
