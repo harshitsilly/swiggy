@@ -3,15 +3,10 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
 
 .run( ['$ionicPlatform', '$rootScope', '$ionicAnalytics', '$window', '$ionicLoading', '$state', function($ionicPlatform,$rootScope,$ionicAnalytics, $window, $ionicLoading,$state) {
   
-     setTimeout(
-            function asyncBootstrap() {
-                angular.bootstrap( document, [ "Demo" ] );
-            },
-            ( 1000 )
-        );
+    
 
     $ionicPlatform.ready(function() {
-      
+    
         // $rootScope.checkSession = function() {
         //     var auth = new FirebaseSimpleLogin(authRef, function(error, user) {
         //         if (error) {
