@@ -293,14 +293,19 @@ $scope.datePickerCallback = function (val) {
 
 
 .controller('overviewCtrl',  ['$scope', '$rootScope', '$ionicModal', '$location', '$state', '$http', '$ionicPopup', '$ionicLoading', '$ionicPlatform', '$timeout', function($scope,$rootScope,$ionicModal,$location,$state,$http,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout) {
+    $scope.closedrestaurants = [1,2] ;
  $ionicPlatform.ready(function() {
+//         var list = document.getElementById("restaurantlist");
+//     list = angular.element(list);
+//   list.append('ng-repeat','closedrestaurant in closedrestaurants');
+ 
      $scope.$on('$stateChangeSuccess', function() {
     $scope.loadMoreData();
   });
-	 $ionicLoading.show({
-      template: '<ion-spinner class="ionicspinner spinner-dark" icon="android"></ion-spinner>'
-    });
- $scope.closedrestaurants = [] ;
+	//  $ionicLoading.show({
+    //   template: '<ion-spinner class="ionicspinner spinner-dark" icon="android"></ion-spinner>'
+    // });
+ 
 $scope.page = 0 ;
 $scope.noMoreItemsAvailable = true;
 
@@ -324,17 +329,19 @@ $http({
  
 }).then(function successCallback(response) {
   $ionicLoading.hide();
-  setTimeout(function() {
+
+//   setTimeout(function() {
       
-  },1000);
+//   },1000);
   console.log(response);
   if(response.data.data.rest_list)
-  {  angular.merge($scope.closedrestaurants ,response.data.data.rest_list[0].restaurants);
+  {  
+      angular.merge($scope.closedrestaurants ,response.data.data.rest_list[0].restaurants);
       if(! $scope.carousels){
                $scope.carousels = response.data.data.carousel;
    }
     // caches.put(partialUrl, response);
-  
+   
    console.log($scope.closedrestaurants);
 //    localStorage.setItem( partialUrl, response);
  if($scope.closedrestaurants.length >=40)
@@ -361,8 +368,8 @@ $http({
      template: 'Could not locate your  device'
    });
 }
-
-    navigator.geolocation.getCurrentPosition(onSuccess, onError,{maximumAge:60000,timeout:20000,enableHighAccuracy:true});
+onSuccess();
+    // navigator.geolocation.getCurrentPosition(onSuccess, onError,{maximumAge:60000,timeout:20000,enableHighAccuracy:true});
 
 
 

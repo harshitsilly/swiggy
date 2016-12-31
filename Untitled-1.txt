@@ -1,0 +1,151 @@
+function fetchnew(request) {
+   fetch(request.clone()).then(function(response) {
+      caches.open('trains-imgs').then(function(cache) {
+        cache.put(request, response).then(function() {
+          console.log('yey img cache');
+        }, function() {
+          console.log('nay img cache');
+        });
+      });
+
+      
+    });
+}
+
+ function ApiResponse(request) {
+  return caches.match(request).then(function(response) {
+    if (response) {
+      fetchnew(request);
+      return response;
+    }
+    if(navigator.onLine)
+    {
+    return fetch(request.clone()).then(function(response) {
+      caches.open('trains-imgs').then(function(cache) {
+        cache.put(request, response).then(function() {
+          console.log('yey img cache');
+        }, function() {
+          console.log('nay img cache');
+        });
+      });
+
+      return response.clone();
+    });
+    }
+    else{
+      return fetch(request);
+    }
+
+   
+  });
+}
+self.addEventListener('push', function(event) {
+  console.log('[Service Worker] Push Received.');
+  console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+
+  const title = 'Push Codelab';
+  const options = {
+    body: 'Yay it works.',
+    icon: 'images/icon.png',
+    badge: 'images/badge.png'
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+// self.addEventListener('push', function(event) {  
+//   event.waitUntil(
+//     fetch('/eh/get_latest_notification', {credentials: 'include'  })  
+//     .then(function(response) {  
+//         if (response.status !== 200) {  
+//           console.log('Looks like there was a problem. Status Code: ' +  
+//             response.status);  
+//           return;  
+//         }
+//         var img = "https://webassets.eventshigh.com/images/logor.png"
+        
+//         // Examine the text in the response  
+//         response.json().then(function(data) {  
+//           console.log(data);  
+//           console.log('Push message received', event);
+//           if (data.img_url && data.img_url != "") {
+//             img = data.img_url;
+//           }
+//           self.targetUrl = data.target_url;
+//           console.log(self.targetUrl);
+//           if (!data.title || data.title == "") {
+//             console.log("Not firing as title is absent");
+//             return;
+//           }
+          
+//             self.registration.showNotification(data.title, {
+//               body: data.desc,
+//               icon: img,
+//               tag: data.city,
+//               requireInteraction: true
+//             })
+          
+//         });
+//     })  
+//     .catch(function(err) {  
+//       console.log('Fetch Error :-S', err);  
+//     })
+//   ); 
+// });
+
+
+self.addEventListener('fetch', function(event) {
+  if (event.request.method === 'GET') {
+    // Should we call event.respondWith() inside this fetch event handler?
+    // This needs to be determined synchronously, which will give other fetch
+    // handlers a chance to handle the request if need be.
+    var shouldRespond;
+
+    // First, remove all the ignored parameter and see if we have that URL
+    // in our cache. If so, great! shouldRespond will be true.
+    var url = stripIgnoredUrlParameters(event.request.url, ignoreUrlParametersMatching);
+    if (url.search("/api/") > -1 ) {
+    event.respondWith(ApiResponse(event.request));
+  }
+    shouldRespond = urlsToCacheKeys.has(url);
+
+    // If shouldRespond is false, check again, this time with 'index.html'
+    // (or whatever the directoryIndex option is set to) at the end.
+    var directoryIndex = 'index.html';
+    if (!shouldRespond && directoryIndex) {
+      url = addDirectoryIndex(url, directoryIndex);
+      shouldRespond = urlsToCacheKeys.has(url);
+    }
+
+    // If shouldRespond is still false, check to see if this is a navigation
+    // request, and if so, whether the URL matches navigateFallbackWhitelist.
+    var navigateFallback = '';
+    if (!shouldRespond &&
+        navigateFallback &&
+        (event.request.mode === 'navigate') &&
+        isPathWhitelisted([], event.request.url)) {
+      url = new URL(navigateFallback, self.location).toString();
+      shouldRespond = urlsToCacheKeys.has(url);
+    }
+
+   
+    // If shouldRespond was set to true at any point, then call
+    // event.respondWith(), using the appropriate cache key.
+    if (shouldRespond) {
+      event.respondWith(
+        caches.open(cacheName).then(function(cache) {
+          return cache.match(urlsToCacheKeys.get(url)).then(function(response) {
+            if (response) {
+              return response;
+            }
+            throw Error('The cached response that was expected is missing.');
+          });
+        }).catch(function(e) {
+          // Fall back to just fetch()ing the request if some unexpected error
+          // prevented the cached response from being valid.
+          console.warn('Couldn\'t serve response for "%s" from cache: %O', event.request.url, e);
+          return fetch(event.request);
+        })
+      );
+    }
+  }
+});

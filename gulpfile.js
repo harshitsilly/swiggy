@@ -14,7 +14,7 @@ var cleanCSS = require('gulp-clean-css');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
-  templateCache: ['./www/templates/**/*.html'],
+  templateCache: ['./www/templates/*.html'],
   ng_annotate: ['./www/js/*.js'],
   // useref: ['./www/*.html'],
   compress : ['./www/dist/dist_js/app/*.js'],
@@ -78,7 +78,7 @@ gulp.task('git-check', function(done) {
 });
 
 gulp.task('templatecache', function(done){
-  gulp.src('./www/templates/**/*.html')
+  gulp.src('./www/templates/*.html')
   .pipe(templateCache({standalone:true}))
   .pipe(gulp.dest('./www/js'))
   .on('end', done);

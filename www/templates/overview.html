@@ -22,7 +22,7 @@
     
  
     </ion-header-bar>
-  <ion-content overflow-scroll="true" padding="true" class="has-header has-footer " ng-controller="overviewCtrl ">
+  <ion-content lazy-scroll overflow-scroll="true" padding="true" class="has-header has-footer " ng-controller="overviewCtrl ">
     
    
  
@@ -42,14 +42,14 @@
   </ion-slides>
   
          
-                    <div  ng-repeat="closedrestaurant in closedrestaurants | filter: search.value  | orderBy :  sort"  id="{{hospital.key}}">
+                    <div  id="restaurantlist" ng-repeat="closedrestaurant in closedrestaurants">
          
      <div class="list card" ng-click="restaurantclick(closedrestaurant)">
 
 
 
-  <div class="item item-image imagerest">
-    <img src="https://res.cloudinary.com/swiggy/image/upload/c_scale,f_auto,fl_lossy,h_134,q_80,w_269/{{closedrestaurant.cloudinaryImageId}}">
+  <div class="item item-image">
+    <img  class="imagerest" image-lazy-src="https://res.cloudinary.com/swiggy/image/upload/c_scale,f_auto,fl_lossy,h_134,q_80,w_269/{{closedrestaurant.cloudinaryImageId}}" lazy-scroll-resize="true" image-lazy-loader="lines">
      <span class="restclosedstatus">{{closedrestaurant.nextOpenMessage}}</span>
   </div>
 

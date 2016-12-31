@@ -1,4 +1,4 @@
-angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.service.analytics','ngCordova','ionic.service.push','angularReverseGeocode','controllers','services','ngAnimate','ngAutocomplete'])
+angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.service.analytics','ngCordova','ionic.service.push','angularReverseGeocode','controllers','services','ngAnimate','ngAutocomplete','ionicLazyLoad'])
 
 
 .run( function($ionicPlatform,$rootScope,$ionicAnalytics, $window, $ionicLoading,$state) {
@@ -248,14 +248,16 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.
   // In the return function, we must pass in a single parameter which will be the data we will work on.
   // We have the ability to support multiple other parameters that can be passed into the filter optionally
   return function(input) {
-    var alength = input.length;
     var output= "";
+    if(input && input.length>0)
+    {
+    var alength = input.length;
     for(var i in input)
     {   
       output =   output + input;
 
     }
-    
+    }
 
     // Do filter work here
 
