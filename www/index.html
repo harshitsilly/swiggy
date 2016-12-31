@@ -144,7 +144,7 @@ const pushButton = document.querySelector('.js-push-btn');
   .then((swReg)  => {
     console.log('Service Worker is registered', swReg);
     swRegistration = swReg;
-    initialiseUI();
+    // initialiseUI();
    
   })
   .catch((error) => {
@@ -323,7 +323,7 @@ function unsubscribeUser() {
     
    
     <!--<script src="dist/controllers.js"></script>-->
-    <script src="js/controllers.js"></script>
+    <script src="dist/controllers.js"></script>
     <script src="dist/services.js"></script>
     <script src="dist/tabSlideBox.js"></script>
     <script src="dist/angular-reverse-geocode.js"></script>
