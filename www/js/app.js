@@ -1,7 +1,7 @@
-angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','ionic.service.analytics','ngCordova','ionic.service.push','angularReverseGeocode','controllers','services','ngAnimate','ngAutocomplete','ionicLazyLoad'])
+angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angularReverseGeocode','controllers','services','ngAnimate','ionicLazyLoad'])
 
 
-.run( function($ionicPlatform,$rootScope,$ionicAnalytics, $window, $ionicLoading,$state) {
+.run( function($ionicPlatform,$rootScope, $window, $ionicLoading,$state) {
   
     
 
