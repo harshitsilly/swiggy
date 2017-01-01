@@ -44,7 +44,7 @@
          
                     <div  id="restaurantlist" ng-repeat="closedrestaurant in closedrestaurants">
          
-     <div class="list card" ng-click="restaurantclick(closedrestaurant)">
+     <div    class="list card" ng-click="restaurantclick(closedrestaurant)">
 
 
 
@@ -54,12 +54,12 @@
   </div>
 
   <div class="item">
-    <div class="Restname">{{closedrestaurant.name}}</div>
+    <div  lazy-Load lazy-Load-Data = "{{closedrestaurant.name}}" class="Restname">{{closedrestaurant.name}}</div>
     {{closedrestaurant.cuisine | cuisineFilter}}
   </div>
   
-  <div class="item " href="#">
-   
+  <div  class="item " href="#">
+   <span lazy-Load lazy-Load-Data = "{{closedrestaurant.name}}">
     <span><i class="rupeeenabled" ng-show="closedrestaurant.costForTwoString[0]"> &#8377
     </i>
     <i  class="rupeeenabled" ng-show="closedrestaurant.costForTwoString[1]"> &#8377
@@ -78,9 +78,10 @@
     </i>
     
     </span>
-    <span><i class="icon ion-star energized"></i>
+    <span ><i class="icon ion-star energized"></i>
     {{closedrestaurant.avg_rating}}
     </span>
+   </span>
   </div>
 
 </div>     

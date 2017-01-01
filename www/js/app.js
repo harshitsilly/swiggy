@@ -1,4 +1,4 @@
-angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angularReverseGeocode','controllers','services','ngAnimate','ionicLazyLoad'])
+angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angularReverseGeocode','controllers','templates','services','ngAnimate','ionicLazyLoad'])
 
 
 .run( function($ionicPlatform,$rootScope, $window, $ionicLoading,$state) {
@@ -42,7 +42,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angula
   
     $rootScope.baseuRL = location.origin;
   
-      $ionicAnalytics.register();
+     
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -141,7 +141,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angula
       
         .state('signup', {
             url: '/signup',
-            templateUrl: 'templates/auth-signup.html',
+            templateUrl: 'auth-signup.html',
                     controller: 'SignUpCtrl'
             
             
@@ -149,14 +149,14 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angula
         
           .state('signin', {
             url: '/signin',
-            templateUrl: 'templates/auth-signin.html',
+            templateUrl: 'auth-signin.html',
                     controller: 'SignInCtrl'
             
         })
         
         .state('menu', {
       url: '/menu',
-      templateUrl: 'templates/menu.html'
+      templateUrl: 'menu.html'
     })
       
     
@@ -168,7 +168,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angula
       url: '/restaurant',
        views: {
         'side-menu21': {
-          templateUrl: 'templates/restaurant.html',
+          templateUrl: 'restaurant.html',
           
         }
       }
@@ -178,7 +178,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angula
       url: '/overview',
       views: {
         'restaurantdetails': {
-          templateUrl: 'templates/overview.html',
+          templateUrl: 'overview.html',
           controller: 'overviewCtrl'
         }
       }
@@ -191,7 +191,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angula
       
       views: {
         'restaurantdetails': {
-          templateUrl: 'templates/card.html',
+          templateUrl: 'card.html',
           controller: 'cardCtrl'
         }
       }
@@ -203,7 +203,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angula
       url: '/notification',
         views: {
         'restaurantdetails': {
-          templateUrl: 'templates/notification.html',
+          templateUrl: 'notification.html',
           controller: 'notificationCtrl'
         }
       }

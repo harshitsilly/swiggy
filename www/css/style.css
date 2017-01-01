@@ -262,8 +262,6 @@ color: #69BB27;
 }
 
 .carouselwidth{
- max-height: 6rem!important;
- min-width: max-content;
  width: 100%!important;
 }
 
@@ -303,7 +301,7 @@ color: #69BB27;
 }
 
 .carouselheight{
-  height: 20%;
+  height: 30%;
 }
 
 .imagerest{
