@@ -336,7 +336,7 @@ $http({
   console.log(response);
   if(response.data.data.rest_list)
   {  
-      angular.merge($scope.closedrestaurants ,response.data.data.rest_list[2].restaurants);
+      angular.merge($scope.closedrestaurants ,response.data.data.rest_list[0].restaurants);
      
       if(! $scope.carousels){
                $scope.carousels = response.data.data.carousel;
