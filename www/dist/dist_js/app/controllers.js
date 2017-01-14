@@ -336,7 +336,14 @@ $http({
   console.log(response);
   if(response.data.data.rest_list)
   {  
-      angular.merge($scope.closedrestaurants ,response.data.data.rest_list[2].restaurants);
+      if(response.data.data.rest_list[0].restaurants.length>0)
+      {
+          angular.merge($scope.closedrestaurants ,response.data.data.rest_list[0].restaurants);
+      }
+      else{
+          angular.merge($scope.closedrestaurants ,response.data.data.rest_list[2].restaurants);
+      }
+      
      
       if(! $scope.carousels){
                $scope.carousels = response.data.data.carousel;

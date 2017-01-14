@@ -72,7 +72,7 @@
   </head>
   
  <!--<body ng-app="bucketList" ng-controller="settingsCtrl" animation="slide-left-right-ios7">-->
-   <body ng-app="bucketList"   animation="slide-left-right-ios7">
+   <body ng-app="bucketList" animation="slide-left-right-ios7">
     <!--
         BEGIN: App-Loading Screen.
         --
@@ -91,7 +91,7 @@
         us to override the animation-blocking within the bounds of our directive, which
         is fine since it only runs once.
     -->
-    <div class="m-app-loading" ng-animate-children>
+    <div class="m-app-loading" ng-animate-children="">
 
         <!--
             HACKY CODE WARNING: I'm putting Style block inside directive so that it
@@ -133,7 +133,7 @@
        
     </ion-nav-view>
    
-     <script >
+     <script>
 
     const applicationServerPublicKey = 'AAAAfrz8ZNs:APA91bEwYSxun8jrpRvhAbXbbTJ8tnxmf4Zcp9Gs9fudcPq0-_Dq4OxI-lt1lEdjpLd4Zwcfdr16pArWJJ_2Qp4fRCqaNsAXUG8gPH8_N4E2vuNnNLH9mMqqaR6S0CM0L49Q13T4M00Sa07hTRLhpEYcta5vX0fmcQ';
 const pushButton = document.querySelector('.js-push-btn');
@@ -305,7 +305,7 @@ function unsubscribeUser() {
      
      <!--<script src="lib/ngstorage/ngStorage.js"></script>-->
      <!--<link href="lib/patternlock/patternLock.css" rel="stylesheet" type="text/css">-->
-<!--<script src="lib/jquery/dist/jquery.min.js"></script>-->
+<script src="lib/jquery/dist/jquery.min.js"></script>
 <script src="lib/ionic-image-lazy-load/ionic-image-lazy-load.js"></script>
 
 <!--<script src="lib/patternlock/patternLock.js"></script>-->
@@ -322,8 +322,8 @@ function unsubscribeUser() {
     <script src="js/app.js"></script>
     
    
-    <!--<script src="dist/controllers.js"></script>-->
     <script src="dist/controllers.js"></script>
+    <!--<script src="js/controllers.js"></script>-->
     <script src="dist/services.js"></script>
     <script src="dist/tabSlideBox.js"></script>
     <script src="dist/angular-reverse-geocode.js"></script>

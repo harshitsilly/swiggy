@@ -66,7 +66,8 @@ angular.module('ionicLazyLoad')
 
                 var loader;
                 // if ($attributes.imageLazyLoader) {
-                //     loader = $compile('<div class="image-loader-container"><ion-spinner class="image-loader" icon="' + $attributes.imageLazyLoader + '"></ion-spinner></div>')($scope);
+                //     
+               loader  = $compile('<div class="image-loader-container"><ion-spinner class="image-loader" icon="' + $attributes.imageLazyLoader + '"></ion-spinner></div>')($scope);
                 //     $element.on(loader);
                 // }
                 if($scope.imageLazySrc !== "")

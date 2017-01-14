@@ -1,24 +1,35 @@
 {
   "name": "swiggy",
-  "app_id": "",
+  "app_id": "8e3ae8f1",
   "proxies": [
     {
       "path": "/api",
       "proxyUrl": "https://www.swiggy.com/api"
     }
   ],
- "v2": false,
+  "v2": false,
   "typescript": false,
   "watch": {
-    "sass": ["scss/**/*.scss"],
-    "templatecache" : ["./www/templates/**/*.html"],
-    "ng_annotate" : ["./www/js/*.js"],
-    "compress" : ["./www/dist/dist_js/app/*.js"],
-    "minify-css" : ["./www/css/style.css"],
-    "generate-service-worker" : ["./www/*"],
+    "sass": [
+      "scss/**/*.scss"
+    ],
+    "templatecache": [
+      "./www/templates/**/*.html"
+    ],
+    "ng_annotate": [
+      "./www/js/*.js"
+    ],
+    "compress": [
+      "./www/dist/dist_js/app/*.js"
+    ],
+    "minify-css": [
+      "./www/css/style.css"
+    ],
+    "generate-service-worker": [
+      "./www/*"
+    ],
     "livereload": [
       "./www/dist/*"
     ]
   }
 }
-
