@@ -40,7 +40,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angula
     //   $state.go('signin');
     // } 
   
-    $rootScope.baseuRL = location.origin;
+    $rootScope.baseuRL = "https://www.swiggy.com";
   
      
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
