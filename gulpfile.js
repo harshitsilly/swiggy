@@ -11,6 +11,7 @@ var ngAnnotate = require('gulp-ng-annotate');
 var useref = require('gulp-useref');
 var uglify = require('gulp-uglify');
 var cleanCSS = require('gulp-clean-css');
+var git = require('gulp-git');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -114,3 +115,20 @@ gulp.task('minify-css', function(done) {
     .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest('./www/dist')).on('end', done);;
 });
+
+gulp.task('release',['fetch'])
+gulp.task('fetch', function(){
+  git.fetch('.', 'master:heroku/master', function (err) {
+    if (err) {throw err}
+    else{
+      setTimeout(function () {
+        gulp.task('push', function(){
+  git.push('origin', '--all', function (err) {
+    if (err) throw err;
+  });
+});
+    }, 1000);
+    }
+  });
+});
+
