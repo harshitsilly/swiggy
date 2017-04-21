@@ -116,19 +116,14 @@ gulp.task('minify-css', function(done) {
     .pipe(gulp.dest('./www/dist')).on('end', done);;
 });
 
-gulp.task('release',['fetch'])
+gulp.task('release',['fetch','push'])
 gulp.task('fetch', function(){
-  git.fetch('.', 'master:heroku/master', function (err) {
-    if (err) {throw err}
-    else{
-      setTimeout(function () {
-        gulp.task('push', function(){
+  git.fetch('origin', 'master:heroku/master', function (err) {
+    if (err) throw err;
+  });
+});
+gulp.task('push', function(){
   git.push('origin', '--all', function (err) {
     if (err) throw err;
   });
 });
-    }, 1000);
-    }
-  });
-});
-
