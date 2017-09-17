@@ -34,12 +34,13 @@
 
 
       <ion-slides class="carouselheight" >
-    <ion-slide-page ng-repeat="carousel in carousels">
+    <ion-slide-page class="ionsliderwidth" ng-repeat="carousel in carousels">
     
-     <img class="carouselwidth" src="https://res.cloudinary.com/swiggy/image/upload/c_scale,f_auto,fl_lossy,h_134,q_80,w_269/{{carousel.creativeId}}">
+     <img class="carouselwidth" src="https://res.cloudinary.com/swiggy/image/upload/c_scale,f_auto,fl_lossy,h_134,q_80,w_269/{{carousel.data.creativeId}}">
+    
     </ion-slide-page>
-    
-  </ion-slides>
+     
+  </ion-slides> 
   
          
                     <div  id="restaurantlist" ng-repeat="closedrestaurant in closedrestaurants">
@@ -55,12 +56,12 @@
 
   <div class="item">
     <div  lazy-Load lazy-Load-Data = "{{closedrestaurant.name}}" class="Restname">{{closedrestaurant.name}}</div>
-    {{closedrestaurant.cuisine | cuisineFilter}}
+    {{closedrestaurant.cuisines | cuisineFilter}}
   </div>
   
   <div  class="item " href="#">
    <span lazy-Load lazy-Load-Data = "{{closedrestaurant.name}}">
-    <span><i class="rupeeenabled" ng-show="closedrestaurant.costForTwoString[0]"> &#8377
+    <!--<span><i class="rupeeenabled" ng-show="closedrestaurant.costForTwoString[0]"> &#8377
     </i>
     <i  class="rupeeenabled" ng-show="closedrestaurant.costForTwoString[1]"> &#8377
  </i>
@@ -75,11 +76,11 @@
     <i  class="rupeedisabled"  ng-hide ="closedrestaurant.costForTwoString[2]"> &#8377
    </i>
     <i  class="rupeedisabled"  ng-hide ="closedrestaurant.costForTwoString[3]"> &#8377
-    </i>
-    
+    </i>-->
+    {{closedrestaurant.costForTwoString}}
     </span>
     <span ><i class="icon ion-star energized"></i>
-    {{closedrestaurant.avg_rating}}
+    {{closedrestaurant.avgRating}}
     </span>
    </span>
   </div>

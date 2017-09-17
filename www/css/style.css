@@ -267,6 +267,9 @@ color: #69BB27;
 .carouselwidth{
  width: 100%!important;
 }
+.ionsliderwidth{
+  width : 240px;
+}
 
 .borderlocation{
   border: 0!important;
@@ -304,7 +307,7 @@ color: #69BB27;
 }
 
 .carouselheight{
-  height: 30%;
+  height: 25%;
 }
 
 .imagerest{

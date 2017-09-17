@@ -11,16 +11,16 @@
 			    	<div class="tsb-icons ">
 			    		<div class="tsb-ic-wrp">
 							<ion-scroll direction="x" class="tsb-hscroll">
-								<a href="javascript:;" class="{{tab.icon}} menuHeaderFont" ng-repeat="menu in foodmenu" on-finish-render="test()">{{menu.name}}</a>
+								<a href="javascript:;" class="{{tab.icon}} menuHeaderFont" ng-repeat="menu in foodmenu.collections" on-finish-render="test()">{{menu.name}}</a>
 							</ion-scroll>
 						</div>
 			    	</div>
 			        <ion-slide-box show-pager="false"   on-slide-changed="slideHasChanged($index)">
-			            <ion-slide  ng-repeat="menu in foodmenu" >
+			            <ion-slide  ng-repeat="menu in foodmenu.collections" >
 			               								
 
   <ion-list class="scrollList">
-        <div ng-repeat="categories in menu.subCategories">
+        <div ng-repeat="categories in menu.subCollections">
           <ion-item class="activecolor"
                     ng-click="toggleGroup(categories)"
                     ng-class="{active: isGroupShown(categories)}">
@@ -30,21 +30,21 @@
              {{categories.name}}
 				 </ion-item>
           <ion-item class="item-accordion marginzero"
-                    ng-repeat="fooditem in categories.menu"
+                    ng-repeat="fooditem in categories.itemViews"
                     ng-show="isGroupShown(categories)">
-					 <div ng-click="" ng-init="fooditem.quantity = 0">
+					 <div ng-click="" ng-init="foodmenu.items["+ {{fooditem.id}}+"].quantity = 0">
 					
 
 
-  <div class="item item-image imagerest" ng-if = "fooditem.cloudinaryImageId">
-    <img src="https://res.cloudinary.com/swiggy/image/upload/c_scale,f_auto,fl_lossy,h_134,q_80,w_269/{{fooditem.cloudinaryImageId}}">
+  <div class="item item-image imagerest" ng-if = "foodmenu.items[{{fooditem.id}}].cloudinaryImageId">
+    <img src="https://res.cloudinary.com/swiggy/image/upload/c_scale,f_auto,fl_lossy,h_134,q_80,w_269/{{foodmenu.items[{{fooditem.id}}].cloudinaryImageId}}">
      <span class="restclosedstatus">{{closedrestaurant.nextOpenMessage}}</span>
   </div>
 
   <div class="row card marginzero">
- <div class="foodDesc">{{fooditem.name}}</div>
+ <div class="foodDesc">{{foodmenu.items[{{fooditem.id}}].name}}</div>
   <div><i class="rupeeenabled moneyDesc"> &#8377</i>
-  <span class="moneyDesc" ng-bind="fooditem.price/100"></span>
+  <span class="moneyDesc" ng-bind="foodmenu.items[{{fooditem.id}}].price/100"></span>
   
    
     

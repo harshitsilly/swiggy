@@ -28,7 +28,7 @@ var proxy = require('http-proxy-middleware');
 
 var app = express();
 // gulp.start("watch");
-app.use('/api/*', proxy({target: 'https://www.swiggy.com', changeOrigin: true}));
+app.use('/mapi/*', proxy({target: 'https://www.swiggy.com', changeOrigin: true}));
 
 app.use(express.static('www'));
 app.set('port', process.env.PORT || 7020);

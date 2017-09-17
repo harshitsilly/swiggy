@@ -293,7 +293,7 @@ $scope.datePickerCallback = function (val) {
 
 
 .controller('overviewCtrl',  ['$scope', '$rootScope', '$ionicModal', '$location', '$state', '$http', '$ionicPopup', '$ionicLoading', '$ionicPlatform', '$timeout', function($scope,$rootScope,$ionicModal,$location,$state,$http,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout) {
-    $scope.closedrestaurants = [1,2] ;
+    $scope.closedrestaurants = [] ;
  $ionicPlatform.ready(function() {
 //         var list = document.getElementById("restaurantlist");
 //     list = angular.element(list);
@@ -322,7 +322,7 @@ $scope.noMoreItemsAvailable = true;
  $scope.lng = 77.67115119999994;
     //   $scope.lat = position.coords.latitude;
     //  $scope.lng = position.coords.longitude;
- var partialUrl = '/api/restaurants/list?lat=' + $scope.lat +'&lng='+ $scope.lng +'&carousel=true&sort=RELEVANCE&page=' + $scope.page ;
+ var partialUrl = '/mapi/restaurants/list?lat=' + $scope.lat +'&lng='+ $scope.lng +'&carousel=true&sort=RELEVANCE&page=' + $scope.page ;
 $http({
   method: 'get',
   url: $rootScope.baseuRL+ partialUrl,
@@ -334,20 +334,24 @@ $http({
       
 //   },1000);
   console.log(response);
-  if(response.data.data.rest_list)
+  if(response.data.data.cards)
   {  
-
-      if(response.data.data.rest_list[0].restaurants.length>0)
+var restaurants = response.data.data.cards;
+      if(restaurants.length>0)
       {
-          angular.merge($scope.closedrestaurants ,response.data.data.rest_list[0].restaurants);
-      }
-      else{
-          angular.merge($scope.closedrestaurants ,response.data.data.rest_list[2].restaurants);
+          for (var i = 0; i < restaurants.length; i++) {
+              var type = restaurants[i].type;
+              if(type === "restaurant")
+              {
+                  $scope.closedrestaurants.push(restaurants[i].data);
+              }
+              
+          }
       }
      
      
       if(! $scope.carousels){
-               $scope.carousels = response.data.data.carousel;
+               $scope.carousels = response.data.data.cards[1].data.cards;
    }
     // caches.put(partialUrl, response);
    
@@ -426,7 +430,7 @@ $scope.dishclick = function(searchresult){
   
     $http({
   method: 'get',
-  url: $rootScope.baseuRL+'/api/restaurants/search?str=' + searchresult +'&lat=' + $scope.lat +'&lng='+ $scope.lng +'&page=',
+  url: $rootScope.baseuRL+'/mapi/restaurants/search?str=' + searchresult +'&lat=' + $scope.lat +'&lng='+ $scope.lng +'&page=',
  
 }).then(function successCallback(response) {
   $ionicLoading.hide();
@@ -452,7 +456,7 @@ $scope.Locationedit = function(){
     $state.go("menu.restaurant.notification")
 }
 $scope.restaurantclick = function(closedrestaurant){
-    $rootScope.slug = closedrestaurant.slugs.restaurant;
+    $rootScope.slugs = closedrestaurant.slugs;
     $state.go("menu.restaurant.card")
 }
 
@@ -1246,15 +1250,15 @@ return $scope.cartItemarray;
 				// $scope.onSlideMove = function(data){
 				// 	alert("You have selected " + data.index + " tab");
 				// };
-    var slug = $rootScope.slug
+    var slug = $rootScope.slugs
    $http({
   method: 'get',
-  url: $rootScope.baseuRL+'/api/restaurants/menu?slug=' + slug,
+  url: $rootScope.baseuRL+'/mapi/menu/'+slug.city+ '/' + slug.restaurant,
  
 }).then(function successCallback(response) {
   console.log(response);
    $scope.restaurant = response.data.data;
-  $scope.foodmenu = response.data.data.categories;
+  $scope.foodmenu = response.data.data.menu;
    console.log($scope.foodmenu);
    $ionicLoading.hide();
   }, function errorCallback(response) {
