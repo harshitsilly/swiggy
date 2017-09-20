@@ -1,111 +1,19 @@
-<ion-view  cache-view="false" title="SWIPE"  ng-init="mySwitch=true" >
-     
-   <ion-content animation="slide-left-right-ios7"  id="eventPlaceholder" has-bouncing="false" class="profile1  has-header" >
-          <div>
-            <blockquote>
-                <p class="hars">Swipe left-right for more cards.</p>
-            </blockquote>
-        </div>
-	<div>
-        <!--<label>Search: <input ng-model="Card"></label>-->
-		<ks-swiper-container initial-slide="1" speed="2000" loop="false" show-nav-buttons="false" slides-per-view="1" space-between="10" pagination-clickable="false" override-parameters="{effect: 'coverflow',coverflow: {rotate: 50,stretch: 10,depth: 100,modifier: 1,slideShadows : true}}"  on-ready="onReadySwiper(swiper)">
-			 <ks-swiper-slide class="swiper-slide" ng-repeat="item in list | filter : Card" ng-model="Card"  id="{{item.key}}" >
-				 <div class="card hars" ng-style="{'background-color': colors[$index]}">
-     <button mfb-button icon="ion-star"  ng-model="mySwitch" ng-click="favourite('{{item.key}}')" label="Favourite"></button>
-         <div class= "row">
-           <span class="col col-80 ">
-               <label>Holder Name : </label>  
-          
-         {{ item.item2 }}  {{mySwitch}}
-         </span>
-         <span   class="col"><button  ng-show="mySwitch"  ng-model="mySwitch" ng-click="favourite('{{item.key}}')" class="button-icon ion-star"></button></span>
-        </div>
-         <div class= "row"> <label >Card Number :</label>        {{ item.item1  | limitTo:10 }}
-         </div>
-         <div class= "row">
-             <span class="col ">
-               <label >Valid Thru :</label>  
-         {{ item.item3 }}
-             </span>
-        <span class="col col-33 ">
-               <label >CVV :</label>  
-         {{ item.item4 }}
-        </span>
-         </div>
-         <div  class= "row">
-               <label>Position :</label>  
-         {{ item.item5 }},{{ item.item6 }}
-         </div>
-           <!--<div  class= "row">
-               <label>Card :</label>  
-         {{ item.item20 }}
-         </div>-->
-          
-         
-         <br/>  <br/>
-         <!--<div ng-controller="accountCtrl"  ng-show ="lastEventCalled=='true'"  class=" ng-hide-remove actions padding ">
-           
-            <i class="ion-trash-b icon-actions margin" ng-click="deleteItem('{{item.key}}')"></i>
-            <i class="ion-stats-bars icon-actions margin" ng-click="transaction('{{item.key}}')"></i>
-         </div>-->
-      </div>
-       
-	  
-	  
-	  
-    </ks-swiper-slide>
-	 
-	
-			
-		</ks-swiper-container>
-         
-     <ks-swiper-container initial-slide="1" speed="2000" loop="false" show-nav-buttons="false" slides-per-view="3" space-between="7" pagination-clickable="false" override-parameters="{effect: 'grabCursor',coverflow: {rotate: 50,stretch: 10,depth: 100,modifier: 1,slideShadows : true}}"  on-ready="onReadySwiper(swiper)">
-			 <ks-swiper-slide class="swiper-slide" ng-repeat="(country,g) in list1"  >
-				 <div class="card hars1 align" ng-style="{'background-color': colors[$index + 8]}">
-      <button class="button-light button-clear align " ng-click="search()"  >{{g}}</button>
-        
-      </div>
-       
-	  
-	  
-	  
-    </ks-swiper-slide>
-	 
-	
-			
-		</ks-swiper-container>
-    
-    
-
-             <div class="card"   ng-show="noData || incomplete">
-      <div class="item item-text-wrap">
-         <span ng-show="incomplete">
-         You have no favourite cards. Please select favourite cards freom ADD card tab.
-         </span>
-         <span ng-show="noData">
-         No cards in your bucket.
-         </span>
-      </div>
-   </div>
+ <ion-nav-bar class="bar-dark">
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+    <ion-nav-buttons side="right">
+      <span class="marginzero" ng-show="locationsearch">
+      <label class="item item-input item-dark borderlocation">
+  <i class="icon ion-search placeholder-icon"></i>
+      <input class="searchsort" type="search"  ng-autocomplete="result1" details="details1" options="options1" placeholder="Search your location.."></input>
+      
+</label>
+      </span>
+      
+      <button class="button button-clear button-light icon ion-search" ng-hide="locationsearch" ng-click="locationsearch = !locationsearch">
+      </button>
+    </ion-nav-buttons>
+</ion-nav-bar>
    
-   
- 
-   
-	</div>
- 
-       <!--<input type="checkbox" ng-model="mySwitch"/>Button-->
+   <ion-content class="padding has-header">
    </ion-content>
-    <nav mfb-menu position="br" effect="slidein-spring" 
-     active-icon="ion-close" resting-icon="ion-plus-round"
-     toggling-method="click"  ng-repeat="item in list" id="{{item.key}}">
-  <button mfb-button icon="ion-edit" label="Edit"></button>
-   <button mfb-button icon="ion-trash-b"  ng-click="deleteItem('{{item.key}}')" label="Delete"></button>
-    <button mfb-button icon="ion-stats-bars"  ng-click="transaction('{{item.key}}')" label="Stats"></button>
-     
-     
-</nav>
-   
-</ion-view>
-
-
- 

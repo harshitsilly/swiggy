@@ -19,7 +19,7 @@ $http({
          
   data: payload
 }).then(function successCallback(response) {
-   $state.go('menu.restaurant.overview')
+   $state.go('restaurant.overview')
   }, function errorCallback(response) {
     // called asynchronously if an error occurs
     // or server returns response with an error status.
@@ -293,7 +293,7 @@ $scope.datePickerCallback = function (val) {
 
 
 .controller('overviewCtrl',  function($scope,$rootScope,$ionicModal,$location,$state,$http,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout) {
-    $scope.closedrestaurants = [] ;
+    $scope.cards = [] ;
  $ionicPlatform.ready(function() {
 //         var list = document.getElementById("restaurantlist");
 //     list = angular.element(list);
@@ -336,28 +336,21 @@ $http({
   console.log(response);
   if(response.data.data.cards)
   {  
-var restaurants = response.data.data.cards;
-      if(restaurants.length>0)
+var cards = response.data.data.cards;
+      if(cards.length>0)
       {
-          for (var i = 0; i < restaurants.length; i++) {
-              var type = restaurants[i].type;
-              if(type === "restaurant")
-              {
-                  $scope.closedrestaurants.push(restaurants[i].data);
-              }
-              
-          }
+          $scope.cards = cards;
       }
      
      
-      if(! $scope.carousels){
-               $scope.carousels = response.data.data.cards[1].data.cards;
-   }
+//       if(! $scope.carousels){
+//                $scope.carousels = response.data.data.cards[1].data.cards;
+//    }
     // caches.put(partialUrl, response);
    
-   console.log($scope.closedrestaurants);
+   console.log($scope.cards);
 //    localStorage.setItem( partialUrl, response);
- if($scope.closedrestaurants.length >=40)
+ if($scope.cards.length >=40)
         {
             $scope.noMoreItemsAvailable=false;
         }
@@ -404,7 +397,7 @@ $scope.searchRD = function(){
     else{
          $http({
   method: 'get',
-  url: $rootScope.baseuRL+'/api/restaurants/search?str=' + $scope.searchString +'&lat=' + $scope.lat +'&lng='+ $scope.lng +'&page=',
+  url: $rootScope.baseuRL+'/mapi/restaurants/search?lat=' + $scope.lat +'&lng='+ $scope.lng + '&str=' + $scope.searchString,
  
 }).then(function successCallback(response) {
   $ionicLoading.hide();
@@ -451,13 +444,18 @@ $scope.dishclick = function(searchresult){
    
    
 }
+$rootScope.dishclick =$scope.dishclick;
 $scope.Locationedit = function(){
     
-    $state.go("menu.restaurant.notification")
+    $state.go("restaurant.notification");
+}
+$scope.search = function(){
+    
+    $state.go("restaurant.notification");
 }
 $scope.restaurantclick = function(closedrestaurant){
     $rootScope.slugs = closedrestaurant.slugs;
-    $state.go("menu.restaurant.card")
+    $state.go("restaurant.card")
 }
 
 
@@ -624,187 +622,7 @@ $scope.restaurantclick = function(closedrestaurant){
 
 .controller('accountCtrl', function($scope,$rootScope, $window, $state, $firebase,$ionicGesture, $interval,$ionicModal,$filter) { 
  
-  $rootScope.search = function(){
-   $rootScope.Card = this.g;
-   
-    console.log( $rootScope.Card);
-    // $state.go('menu.account', null, {reload: true});
-    
-    
-  }
-  
-  
-  
-  var m = {
-   item20 : "Credit",
-  item21 : "Debit",
-   item22 :"Wallet"
-};
- $scope.list1 = m;
-   $scope.numLimit = 10;
-    $scope.colors = ['#F44336','#9C27B0', '#673AB7','#3F51B5','#0097A7','#00796B','#689F38','#4CAF50','#FF5722','#FD4037','#455A64']
-     $scope.swiper = {};
- 
-    $scope.onReadySwiper = function (swiper) {
- 
-        swiper.on('slideChangeStart', function () {
-            console.log('slide start');
-        });
-         
-        swiper.on('onSlideChangeEnd', function () {
-            console.log('slide end');
-        });     
-    };
-  
-   $rootScope.show("Please wait... Processing");
-    $scope.list = [];
-
-    var bucketListRef = new Firebase($rootScope.baseUrl + escapeEmailAddress($rootScope.userEmail));
-    bucketListRef.on('value', function(snapshot) {
-        $scope.list = [];
-        var data = snapshot.val();
-  
-
-        for (var key in data) {
-            if (data.hasOwnProperty(key)) {
-                
-        
-                
-                if (data[key].item5== $rootScope.positions[0].lat ) {
-                    data[key].key = key;
-                    
-                    $scope.list.push(data[key]);
-                   
-                }
-            }
-        }
-        if ($scope.list.length == 0) {
-            $scope.noData = true;
-        } else {
-            $scope.noData = false;
-        }
-
-        $rootScope.hide();
-    });
-
-    $scope.deleteItem = function(key) {
-        $rootScope.show("Please wait... Deleting from List");
-        var itemRef = new Firebase($rootScope.baseUrl + escapeEmailAddress($rootScope.userEmail));
-        bucketListRef.child(key).remove(function(error) {
-            if (error) {
-                $rootScope.hide();
-                $rootScope.notify('Oops! something went wrong. Try again later');
-            } else {
-                $rootScope.hide();
-                $rootScope.notify('Successfully deleted');
-            }
-        });
-    };
-    
-    
-    
-   
-          $ionicModal.fromTemplateUrl('templates/transaction.html', function(modal) {
-        $scope.newTemplate = modal;
-    });
-         
-          $scope.transaction = function() {
-           $scope.newTemplate.show();
-         };
-         
-         
-         
-          $scope.favourite = function(key) { 
-            console.log(localStorage.star);
-           if (localStorage.star == "true") {
-             localStorage.star = "false";
-             console.log("star");
-           } else {
-             localStorage.star = "true";
-             console.log("star1");
-           } 
-            
-            this.mySwitch =  localStorage.star;
-            console.log( this.mySwitch);
-        
-          }
-          
-         this.mySwitch =  localStorage.star;
-         
-          console.log( this.mySwitch);
-          
-  // function showBanner(index) {
-	// 			var oldElm = document.querySelector('.slider ion-slide.slider-slide.current');
-	// 			var q = '.slider ion-slide.slider-slide[data-index="' + index + '"]';
-	// 			var elm = document.querySelector(q);
-
-  //       console.log("Show banner " + index);
-        
-	// 			// Remove class "current"
-	// 			if (null !== oldElm) {
-	// 				oldElm.classList.remove("current");
-	// 			}
-
-	// 			// Add class "current" to current slide
-	// 			if (null !== elm) {
-	// 				elm.classList.add("current");
-	// 			}
-	// 		}
-  
-  
-
-	// 		$scope.activeSlide = 0;
-
-	// 		setTimeout(function() {
-	// 			showBanner($scope.activeSlide);
-	// 		}, 100);
-
-	// 		$scope.slideChanged = showBanner;
-            
-            
-             $scope.lastEventCalled = "true";
-  var element = angular.element(document.querySelector('#eventPlaceholder'));
-  var events = [{
-    event: 'dragup',
-    text: 'true'
-  },{
-    event: 'dragdown',
-    text: 'You dragged me Down!'
-  },{
-    event: 'dragleft',
-    text: 'You dragged me Left!'
-  },{
-    event: 'dragright',
-    text: 'You dragged me Right!'
-  }];
-  
-  angular.forEach(events, function(obj){
-    $ionicGesture.on(obj.event, function (event) {
-      $scope.$apply(function () {
-        $scope.lastEventCalled = obj.text;
-      });
-    }, element);
-    
-  });
-  
-   $scope.noData3 = function() {
-         
-
-        if ($scope.lastEventCalled=="true") {
-            $scope.noData3 = true;
-             console.log("yes");
-        } else {
-            $scope.noData3 = false;
-            console.log("no");
-        }
-       return $scope.noData3;
-    };
-
-       $scope.noData3();
-    
-       
-      
-      
+     
  
 })
 
@@ -1172,11 +990,49 @@ return !$scope.noData3;
 
 })
 
-.controller('notificationCtrl', function($scope,$state) {
-  $scope.locationback = function(){$state.go("menu.overview");
-  }
+.controller('notificationCtrl', function($scope,$state,$http,$rootScope) {
+     $scope.lat = 12.926007;
+ $scope.lng = 77.67115119999994;
+  $scope.backToReataurant = function(){
+     $state.go("restaurant.overview");
+ }
+ $scope.restaurantclick = function(closedrestaurant){
+    $rootScope.slugs = closedrestaurant.slugs;
+    $state.go("restaurant.card")
+}
+ $scope.searchRD = function(){
+    
+    if($scope.searchString==="")
+    {
+ navigator.geolocation.getCurrentPosition(onSuccess, onError,{maximumAge:60000,timeout:20000,enableHighAccuracy:true});
+    }
+    else{
+         $http({
+  method: 'get',
+  url: $rootScope.baseuRL+'/mapi/restaurants/search?lat=' + $scope.lat +'&lng='+ $scope.lng + '&str=' + $scope.searchString,
+ 
+}).then(function successCallback(response) {
+//   $ionicLoading.hide();
+//   setTimeout(function() {
+      
+//   },1000);
+  console.log(response);
+//   $timeout(function(){
+  // Any code in here will automatically have an $scope.apply() run afterwards
+ $scope.searchquery = response.data.data.restaurants;
+ 
+ 
+// },100);
+ 
+ 
+//  $scope.closedrestaurants = response.data.data.restaurants[2];
+ 
+});
+    }
+   
+}
 })
-
+ 
 .controller('cardCtrl', function($scope,$rootScope,$http,$ionicSlideBoxDelegate,$ionicModal,$ionicLoading,$ionicPlatform) {
 $ionicPlatform.ready(function() {
      $ionicLoading.show({

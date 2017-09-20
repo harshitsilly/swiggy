@@ -154,27 +154,23 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angula
             
         })
         
-        .state('menu', {
-      url: '/menu',
-      templateUrl: 'menu.html'
-    })
+    //     .state('menu', {
+    //   url: '/menu',
+    //   templateUrl: 'menu.html'
+    // })
       
     
     
   
    
         
-    .state('menu.restaurant', {
+    .state('restaurant', {
       url: '/restaurant',
-       views: {
-        'side-menu21': {
-          templateUrl: 'restaurant.html',
-          
-        }
-      }
+       templateUrl: 'restaurant.html',
+       
     })
 
-     .state('menu.restaurant.overview', {
+     .state('restaurant.overview', {
       url: '/overview',
       views: {
         'restaurantdetails': {
@@ -186,7 +182,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angula
 
     
     
-     .state('menu.restaurant.card', {
+     .state('restaurant.card', {
       url: '/card',
       
       views: {
@@ -199,12 +195,23 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angula
 
      
     
-      .state('menu.restaurant.notification', {
+      .state('restaurant.notification', {
       url: '/notification',
         views: {
         'restaurantdetails': {
           templateUrl: 'notification.html',
           controller: 'notificationCtrl'
+        }
+      }
+        
+       
+    })
+     .state('restaurant.search', {
+      url: '/search',
+        views: {
+        'restaurantdetails': {
+          templateUrl: 'account.html',
+          controller: 'accountCtrl'
         }
       }
         
@@ -230,7 +237,7 @@ angular.module('bucketList', ['ionic','tabSlideBox','florian.directives','angula
         
     
         
-    $urlRouterProvider.otherwise('/menu/restaurant/overview');
+    $urlRouterProvider.otherwise('/restaurant/overview');
 })
 
 .factory('mySocket', function (socketFactory) {

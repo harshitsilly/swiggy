@@ -1,40 +1,44 @@
 <ion-view title="{{restaurant.name}}" ng-init="locationsearch=false">
-   <ion-nav-bar class="bar-dark">
-  <ion-nav-back-button>
-  </ion-nav-back-button>
-    <ion-nav-buttons side="right">
-      <span class="marginzero" ng-show="locationsearch">
-      <label class="item item-input item-dark borderlocation">
-  <i class="icon ion-search placeholder-icon"></i>
-      <input class="searchsort" type="search"  ng-autocomplete="result1" details="details1" options="options1" placeholder="Search your location.."></input>
+   <ion-header-bar class="bar-light">
+  <!--<ion-nav-back-button>
+  </ion-nav-back-button>-->
+   
+      <button class="button button-clear button-light icon ion-arrow-left-c" ng-click="backToReataurant()">
+      </button>
+      <label class="item item-input  borderlocation">
+  <i class="icon-light icon ion-search placeholder-icon"></i>
+      <input class="searchsort" type="search" ng-model="searchString" ng-change="searchRD()" placeholder="Search Restaurant.."></input>
       
 </label>
-      </span>
       
-      <button class="button button-clear button-light icon ion-search" ng-hide="locationsearch" ng-click="locationsearch = !locationsearch">
-      </button>
-    </ion-nav-buttons>
-</ion-nav-bar>
+</ion-header-bar>
    
    <ion-content class="padding has-header">
-     <div class="row">
- <div> 
-Delivery Location
- </div>
-   <button class="button  button-clear icon-left ion-location button-positive">Locate me</button>
-</div>
-
-  <!--<div class="card">
-  <div class="item item-text-wrap">
-    Saved Address
-  </div>
-   <button class="button button-clear icon-left ion-location button-positive">Locate me</button>
-</div>
--->
-
-
-
+    
      
-      
+    <div  class="padding" id="restaurantlist"  ng-repeat="restaurant in searchquery">
+      <div   ng-if="restaurant.type == 'opened'" ng-repeat="closedrestaurant in restaurant.restaurants">
+       <div    class="list card" ng-click="restaurantclick(closedrestaurant)">
+
+
+
+  <div class="item item-image ">
+    <img  class="imagerestSearch" image-lazy-src="https://res.cloudinary.com/swiggy/image/upload/c_scale,f_auto,fl_lossy,h_134,q_80,w_269/{{closedrestaurant.cloudinaryImageId}}" lazy-scroll-resize="true" image-lazy-loader="lines">
+     <span class="restclosedstatus">{{closedrestaurant.nextOpenMessage}}</span>
+  </div>
+
+  <div class="">
+    <div  lazy-Load lazy-Load-Data = "{{closedrestaurant.name}}" class="RestnameSearch">{{closedrestaurant.name}}</div>
+    {{closedrestaurant.cuisines | cuisineFilter}}
+  </div>
+  </div>
+
+  </div>
+</div>     
+                    
+                   
+                       
+                         
+    </div>
    </ion-content>
 </ion-view>

@@ -21,9 +21,12 @@
     background-color: #fff;
     text-align: center;
     font-weight: 300;
+    
   
 }
-
+.swiper-slide{
+  width : 244px!important;
+}
 .tabbed-slidebox .tsb-icons {
     padding: 0;
     text-align: center;
@@ -176,6 +179,10 @@ progress::-webkit-progress-bar{
   padding-bottom: .6rem;
 }
 
+.RestnameSearch{
+  font-size: 1.5rem;
+  padding: .6rem;
+}
 
 .restclosedstatus { 
    z-index: 100;
@@ -273,6 +280,7 @@ color: #69BB27;
 
 .borderlocation{
   border: 0!important;
+ 
   width: 100%!important;
  
 }
@@ -307,11 +315,29 @@ color: #69BB27;
 }
 
 .carouselheight{
-  height: 25%;
+  height: 158px;
+}
+.headerText{
+  font-size: 1.3rem;
+    font-weight: 600;
+}
+.messageTex{
+  color: #f69032;
+}
+.textPosition{
+  position: absolute;
+  top: 35%;
+}
+
+.separator{
+  border-bottom: 2px solid black;
 }
 
 .imagerest{
   height: 10rem;
+}
+.imagerestSearch{
+  height: 7rem;
 }
 .imagebackground{
   background: linear-gradient(266deg, #f0f7f5, #969492);

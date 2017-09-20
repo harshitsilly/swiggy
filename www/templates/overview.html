@@ -1,27 +1,18 @@
 
-<ion-view title="Home">
+<ion-view title="1Swiggy">
     
+   
+     
+    <ion-nav-bar class="bar-dark">
+  <!--<ion-nav-back-button>
+  </ion-nav-back-button>-->
     <ion-nav-buttons side="right">
-      
-      
-      <button class="button button-clear button-light icon ion-edit" ng-click="Locationedit()">
-      </button>
-    </ion-nav-buttons>
-       
-    <ion-header-bar class="bar-subheader"> 
-      <span class="marginzero col col-90">
-      <label class="item item-input ">
-  <i class="icon ion-search placeholder-icon"></i>
-      <input class="searchsort" type="search" ng-model="searchString" ng-change="searchRD()" placeholder="Search restaurants,dishes.."></input>
-      
-</label>
-      </span>
-      <button class="button button-clear button-dark icon ion-funnel" ng-click="restaurantsort()">
-        
+     <button class="button button-clear button-light icon ion-edit" ng-click="Locationedit()">
+        <button class="button button-clear button-light icon ion-search" ng-click="search()">
       </button>
     
- 
-    </ion-header-bar>
+    </ion-nav-buttons>
+</ion-nav-bar>
   <ion-content lazy-scroll overflow-scroll="true" padding="true" class="has-header has-footer " ng-controller="overviewCtrl ">
     
    
@@ -33,19 +24,41 @@
   
 
 
-      <ion-slides class="carouselheight" >
-    <ion-slide-page class="ionsliderwidth" ng-repeat="carousel in carousels">
+      
+  
+         
+                    <div  id="restaurantlist" ng-init="closedrestaurant = card.data" ng-repeat="card in cards">
+                    <div class="messageTex" ng-if="card.type=='messageCard'">
+                      {{card.data.message}}
+                    </div>
+                    <div class="separator" ng-if="card.type=='separator'">
+                     
+                    </div>
+                <span class="headerText" ng-if="card.data.title">{{card.data.title}}</span>
+           <span ng-if="card.data.subtitle">{{card.data.subtitle}}</span>
+         <ion-slides ng-if="card.type=='carousel'"  class="carouselheight" >
+           
+    <ion-slide-page  class="ionsliderwidth" ng-repeat="carousel in card.data.cards">
     
      <img class="carouselwidth" src="https://res.cloudinary.com/swiggy/image/upload/c_scale,f_auto,fl_lossy,h_134,q_80,w_269/{{carousel.data.creativeId}}">
-    
+     <div class="textPosition">
+     <div class="headerText" ng-if="carousel.data.title">{{carousel.data.title}}</div>
+     <div ng-if="carousel.data.subtitle">{{carousel.data.subtitle}}</div>
+     </div>
     </ion-slide-page>
      
   </ion-slides> 
-  
-         
-                    <div  id="restaurantlist" ng-repeat="closedrestaurant in closedrestaurants">
-         
-     <div    class="list card" ng-click="restaurantclick(closedrestaurant)">
+  <ion-slides ng-if="card.type=='collection'"  class="carouselheight" >
+          
+    <ion-slide-page  class="ionsliderwidth" ng-repeat="collection in card.data.cards">
+    
+     <img class="carouselwidth" src="https://res.cloudinary.com/swiggy/image/upload/c_scale,f_auto,fl_lossy,h_134,q_80,w_269/{{collection.data.cloudinaryImageId}}">
+     <span ng-if="carousel.data.name">{{collection.data.name}}</span>
+     <span ng-if="carousel.data.slaString">{{collection.data.slaString}}</span>
+    </ion-slide-page>
+     
+  </ion-slides> 
+     <div   ng-if="card.type=='restaurant'" class="list card" ng-click="restaurantclick(closedrestaurant)">
 
 
 
